@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bussiness Intelligence Project</title>
+  <title>Business Intelligence Project</title>
   <style>
     * {
       margin: 0;
@@ -134,23 +134,31 @@
       border: 1px solid rgba(168, 85, 247, 0.2);
     }
 
-    .dashboard-frame-wrap {
-      position: relative;
-      padding-top: 68%;
-      height: 0;
-      overflow: hidden;
-      border-radius: 16px;
+    .screenshot-gallery {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
       margin-bottom: 2rem;
-      border: 1px solid rgba(168, 85, 247, 0.2);
     }
 
-    .dashboard-frame-wrap iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
+    .screenshot-item {
+      border: 1px solid rgba(168, 85, 247, 0.2);
+      border-radius: 16px;
+      overflow: hidden;
+      background: #ffffff;
+    }
+
+    .screenshot-item img {
       width: 100%;
-      height: 100%;
-      border: none;
+      display: block;
+    }
+
+    .screenshot-caption {
+      background: rgba(168, 85, 247, 0.08);
+      color: #d4d4d8;
+      font-size: 0.85rem;
+      padding: 0.75rem 1.25rem;
+      border-top: 1px solid rgba(168, 85, 247, 0.15);
     }
 
     .key-insights {
@@ -253,7 +261,7 @@
     }
 
     .toggle-content.active {
-      max-height: 600px;
+      max-height: 700px;
       padding: 1.5rem;
     }
 
@@ -269,6 +277,16 @@
 
     .toggle-content strong {
       color: #ffffff;
+    }
+
+    .toggle-content ul {
+      color: #d4d4d8;
+      padding-left: 1.3rem;
+      margin-bottom: 1rem;
+    }
+
+    .toggle-content li {
+      margin-bottom: 0.4rem;
     }
 
     .data-link {
@@ -296,7 +314,6 @@
       .section-title { font-size: 2rem; }
       .container { padding: 1rem; }
       .project-card { padding: 1.5rem; }
-      .dashboard-frame-wrap { padding-top: 120%; }
     }
   </style>
 </head>
@@ -304,35 +321,47 @@
   <div class="container">
     <div class="header">
       <a href="index.html#projects" class="back-link">← Back to Portfolio</a>
-      <h1 class="section-title">Bussiness Inteligence</h1>
-      <p class="subtitle">Transforming data into actionable insights through Excel, Power Query, Power Pivot, and DAX</p>
+      <h1 class="section-title">Business Intelligence</h1>
+      <p class="subtitle">Transforming raw data into structured models and actionable insights through Excel, Power Pivot, and DAX</p>
     </div>
 
     <div class="project-card">
-      <h3 class="project-title">Crime Data Analysis & Interactive Dashboard</h3>
-      <div class="role-badge">👤 My Role: Solo Project, Data Analyst & Dashboard Developer</div>
+      <h3 class="project-title">Indonesian Crime Data Analysis & Interactive Dashboard</h3>
+      <div class="role-badge">👥 Team Project, My Role: Data Cleaning & Measures/Chart Development</div>
       <p class="project-description">
-        Built an interactive Excel dashboard using Power Query, Power Pivot, and DAX to analyze crime cases, severity, arrests, response time, and solve rates for data-driven insights.
+        A relational data model built in Excel using a star schema (1 fact table and 4 dimension tables) to analyze
+        crime case data across Indonesia, covering case severity, arrest rates, response time, and case resolution
+        status. The model powers a set of PivotTables, PivotCharts, and an interactive dashboard for exploring
+        crime patterns by region, category, and time period.
       </p>
 
       <div class="tech-stack">
         <span class="tech-tag">Excel</span>
         <span class="tech-tag">Power Pivot</span>
         <span class="tech-tag">DAX</span>
+        <span class="tech-tag">Star Schema</span>
+        <span class="tech-tag">PivotTable & PivotChart</span>
       </div>
 
-      <div class="dashboard-frame-wrap">
-        <iframe src="https://public.tableau.com/views/MyProject_17900015226670/Dashboard?:showVizHome=no&:embed=true" allowfullscreen></iframe>
+      <div class="screenshot-gallery">
+        <div class="screenshot-item">
+          <img src="shot_pivot_charts.jpg" alt="Pivot Table and Chart analysis sheet">
+          <div class="screenshot-caption">KPI scorecard and PivotChart breakdowns, arrest rate by crime type, case distribution by province, average response time, case status by year, and monthly case trend.</div>
+        </div>
+        <div class="screenshot-item">
+          <img src="shot_dashboard_table.jpg" alt="Interactive dashboard table with conditional formatting">
+          <div class="screenshot-caption">Interactive dashboard table showing arrest rate per crime type with conditional formatting status indicators.</div>
+        </div>
       </div>
 
       <div class="key-insights">
         <h4>Key Insights</h4>
         <ul>
-          <li>Annual revenue was $34.5M from around 178,000 orders, with an average order value of $193.</li>
-          <li>December had the highest monthly revenue at $4.6M, mainly due to holiday shopping.</li>
-          <li>San Francisco had the highest revenue by city at $8.26M, much higher than the second-highest city.</li>
-          <li>Computers had the highest revenue at $12.2M, even though Cables and Batteries had more units sold.</li>
-          <li>7 PM was the busiest ordering time, followed by the 11 AM–12 PM period.</li>
+          <li>670 total cases recorded across 89 regions in Indonesia, with 544 arrests made (an 81% arrest rate).</li>
+          <li>Only 159 cases (23.7%) were marked as fully solved, while the rest remained reported, under investigation, or closed without resolution.</li>
+          <li>416 cases (62% of all cases) were classified as high severity, and the average police response time was 25.9 days.</li>
+          <li>Fraud, Cybercrime, and Corruption were the top 3 crime categories by case count (67, 66, and 57 cases).</li>
+          <li>DKI Jakarta recorded the highest number of cases (107), well above other provinces.</li>
         </ul>
       </div>
 
@@ -344,8 +373,8 @@
             <span class="toggle-arrow">▼</span>
           </button>
           <div class="toggle-content">
-            <p><strong>Problem:</strong> Retail management needs to understand 2019 sales patterns to improve inventory, advertising time, and resource allocation.</p>
-            <p><strong>Recommendation:</strong> Increase stock and customer service staff before October–December because of higher seasonal demand. Focus advertising around 11 AM–12 PM and 6–8 PM, when orders are highest. Consider increasing fulfillment capacity in the San Francisco Bay Area because of its high revenue. Also, focus on selling more Computers and Phones, as they generate more revenue per unit than high-volume products like Cables and Batteries.</p>
+            <p><strong>Problem:</strong> Police departments need a clear way to monitor case resolution performance across regions and crime types, so resources like officers and investigation time can be allocated where they are needed most.</p>
+            <p><strong>Recommendation:</strong> Prioritize additional investigative resources for Fraud, Cybercrime, and Corruption cases, since they make up the largest share of reported cases. Investigate why the overall solve rate is low (23.7%) despite a high arrest rate, as this gap suggests many arrests do not lead to case closure. Focus process improvements on high-case-volume regions like DKI Jakarta, and review response time procedures given the 25.9-day average, which may be too slow for high severity cases.</p>
           </div>
         </div>
 
@@ -356,10 +385,16 @@
             <span class="toggle-arrow">▼</span>
           </button>
           <div class="toggle-content">
-            <p><strong>Data source:</strong> This dataset has real retail transaction records from 2019, with around 186,000 orders from a US electronics retailer. I got this dataset from a public GitHub repository that shares open datasets for data analysis practice. I picked this dataset because it is real transaction data, not made up numbers, and it has enough rows and useful fields, like order date, product, price, and customer address, to build a full business dashboard with trends, rankings, and location based insights.</p>
-            <p>You can download the cleaned dataset used in this project below.</p>
-            <a href="retail_sales_2019_clean.zip" class="data-link" download>📎 Download Dataset (CSV)</a>
-            <p><strong>Approach:</strong> The data was cleaned and organized with clear fields for order date, product category, revenue, and city and state. Using this data, I built the dashboard in Tableau, including KPI cards for total revenue, total orders, average order value, and total units sold, a monthly revenue trend, a city and category breakdown, an hourly order pattern, and a top 10 product ranking. I also added filters for month and category so viewers can explore the data interactively.</p>
+            <p><strong>Data model:</strong> The workbook is structured as a star schema with one fact table and four dimension tables:</p>
+            <ul>
+              <li><strong>Fact_CrimeReport</strong> — the central table holding case counts, victim counts, arrest counts, response time, severity level, and case status for each report</li>
+              <li><strong>Dim_Location</strong> — province, city, and district details for each region</li>
+              <li><strong>Dim_CrimeType</strong> — crime category, description, severity level, and legal consequences</li>
+              <li><strong>Dim_Officer</strong> — officer name, rank, department, and years of service</li>
+              <li><strong>Dim_Victim</strong> — victim demographics, occupation, and injury severity</li>
+            </ul>
+            <p><strong>My contribution:</strong> Within the team, I was responsible for cleaning the raw data before it was loaded into the model, and for building the key DAX measures (case counts, arrest rate, solve rate, average response time) along with several of the PivotCharts used in the dashboard, including the arrest rate breakdown and the monthly case trend chart.</p>
+            <p><strong>Approach:</strong> The four dimension tables were connected to the fact table through relationships in Power Pivot, based on their respective ID fields. DAX measures were then built on top of this model to calculate rates and averages dynamically, which were used to power the PivotTables, PivotCharts, and the conditional-formatted interactive dashboard table.</p>
           </div>
         </div>
       </div>
