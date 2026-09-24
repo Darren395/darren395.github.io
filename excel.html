@@ -334,6 +334,9 @@
         status. The model powers a set of PivotTables, PivotCharts, and an interactive dashboard for exploring
         crime patterns by region, category, and time period.
       </p>
+      <p class="project-disclaimer">
+        ⚠️ Disclaimer: The dataset used in this project was generated with the assistance of AI and is intended for educational and demonstration purposes only.
+    </p>
 
       <div class="tech-stack">
         <span class="tech-tag">Excel</span>
@@ -387,13 +390,14 @@
           <div class="toggle-content">
             <p><strong>Data model:</strong> The workbook is structured as a star schema with one fact table and four dimension tables:</p>
             <ul>
-              <li><strong>Fact_CrimeReport</strong> — the central table holding case counts, victim counts, arrest counts, response time, severity level, and case status for each report</li>
-              <li><strong>Dim_Location</strong> — province, city, and district details for each region</li>
-              <li><strong>Dim_CrimeType</strong> — crime category, description, severity level, and legal consequences</li>
-              <li><strong>Dim_Officer</strong> — officer name, rank, department, and years of service</li>
-              <li><strong>Dim_Victim</strong> — victim demographics, occupation, and injury severity</li>
+              <li><strong>Fact_CrimeReport</strong>, The central table holding case counts, victim counts, arrest counts, response time, severity level, and case status for each report</li>
+              <li><strong>Dim_Location</strong>, Province, city, and district details for each region</li>
+              <li><strong>Dim_CrimeType</strong>, Crime category, description, severity level, and legal consequences</li>
+              <li><strong>Dim_Officer</strong>, Officer name, rank, department, and years of service</li>
+              <li><strong>Dim_Victim</strong>, Victim demographics, occupation, and injury severity</li>
             </ul>
             <p><strong>My contribution:</strong> Within the team, I was responsible for cleaning the raw data before it was loaded into the model, and for building the key DAX measures (case counts, arrest rate, solve rate, average response time) along with several of the PivotCharts used in the dashboard, including the arrest rate breakdown and the monthly case trend chart.</p>
+            <a href="Project Data Kepolisian Data Modelling.xlsx" class="data-link" download>📎 Download The Project </a>
             <p><strong>Approach:</strong> The four dimension tables were connected to the fact table through relationships in Power Pivot, based on their respective ID fields. DAX measures were then built on top of this model to calculate rates and averages dynamically, which were used to power the PivotTables, PivotCharts, and the conditional-formatted interactive dashboard table.</p>
           </div>
         </div>
