@@ -228,7 +228,7 @@
 
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 1rem;
             margin-top: 2rem;
         }
@@ -566,6 +566,14 @@
                 grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
             }
 
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-category-card[style*="grid-column"] {
+                grid-column: auto !important;
+            }
+
             .job-entry, .education-entry {
                 flex-direction: column;
             }
@@ -743,7 +751,7 @@
                     </a>
                 </div>
 
-                <div class="project-category-card">
+                <div class="project-category-card" style="grid-column: 2;">
                     <div class="category-icon">🗂️</div>
                     <h3>Other</h3>
                     <p>Systems Analysis & Design, and more</p>
