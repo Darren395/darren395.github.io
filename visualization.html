@@ -367,6 +367,64 @@
         </div>
       </div>
     </div>
+
+    <div class="project-card">
+      <h3 class="project-title">U.S. Crime & Public Safety Dashboard (2020–2025)</h3>
+      <div class="role-badge">👤 My Role: Solo Project, Data Analyst & Dashboard Developer</div>
+      <p class="project-description">
+        An interactive Tableau dashboard analyzing 1,000 recorded crime cases across 10 major U.S. cities between
+        2020 and 2025, covering crime type distribution, victim demographics, city-level patterns, and time-of-day
+        trends to support public safety planning.
+      </p>
+
+      <div class="tech-stack">
+        <span class="tech-tag">Tableau</span>
+        <span class="tech-tag">Data Visualization</span>
+        <span class="tech-tag">Heat Map</span>
+        <span class="tech-tag">Filters</span>
+      </div>
+
+      <div class="dashboard-frame-wrap">
+        <iframe src="https://public.tableau.com/views/ProjectDavisDarren/Dashboard?:showVizHome=no&:embed=true" allowfullscreen></iframe>
+      </div>
+
+      <div class="key-insights">
+        <h4>Key Insights</h4>
+        <ul>
+          <li>Domestic Violence was the most common crime type recorded across all 10 cities.</li>
+          <li>The dataset covered 1,000 crime cases from 2020 to 2025, with an average victim age of 52.2 years.</li>
+          <li>Night time accounted for the largest share of crime occurrences (34.5%), followed by Morning (28.1%), Afternoon (20.4%), and Evening (17.0%).</li>
+          <li>Dallas recorded a notable spike in Burglary cases (19), while San Diego had the highest number of Domestic Violence cases (17) among the 10 cities.</li>
+          <li>Overall criminality across the 10 cities rose from 2020, peaked around the middle of the period, then declined toward 2025.</li>
+        </ul>
+      </div>
+
+      <div class="project-toggles">
+        <div class="toggle-section">
+          <button class="toggle-btn" onclick="toggleSection(this)">
+            <span class="toggle-icon">📄</span>
+            <span class="toggle-text">Problem & Business Recommendation</span>
+            <span class="toggle-arrow">▼</span>
+          </button>
+          <div class="toggle-content">
+            <p><strong>Problem:</strong> Public safety agencies need to understand which crime types, cities, and time periods carry the highest risk, so patrol resources and prevention programs can be allocated effectively across the 10 monitored cities.</p>
+            <p><strong>Recommendation:</strong> Increase night-time and early-morning patrol presence, since these two periods together account for over 60% of recorded crimes. Prioritize domestic violence prevention and support programs, as it was the most common crime type overall. Investigate the specific drivers behind Dallas's spike in burglary cases and San Diego's spike in domestic violence cases to design targeted local interventions. Review what changed after the mid-period criminality peak to understand what, if anything, contributed to the later decline.</p>
+          </div>
+        </div>
+
+        <div class="toggle-section">
+          <button class="toggle-btn" onclick="toggleSection(this)">
+            <span class="toggle-icon">⚙️</span>
+            <span class="toggle-text">Data & Technical Approach</span>
+            <span class="toggle-arrow">▼</span>
+          </button>
+          <div class="toggle-content">
+            <p><strong>Data source:</strong> This dataset was downloaded from Kaggle and contains 1,000 recorded crime cases across 10 major U.S. cities (Chicago, Dallas, Houston, Los Angeles, New York, Philadelphia, Phoenix, San Antonio, San Diego, and San Jose) between 2020 and 2025, including crime type, victim demographics, city, year, and time of day.</p>
+            <p><strong>Approach:</strong> The data was loaded into Tableau to build KPI cards for the most common crime type, average victim age, and total cases, along with a bar chart ranking crime types by total cases, a heat map showing crime type distribution per city, a line chart tracking the criminality trend over the years, and a pie chart breaking down the time of day when crimes occurred. Filters for victim race and year were added so viewers can explore the data interactively.</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script>
