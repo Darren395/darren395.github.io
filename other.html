@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Business Intelligence Project</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+      color: #ffffff;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .header {
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #a855f7;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      background: rgba(168, 85, 247, 0.1);
+      border: 1px solid rgba(168, 85, 247, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .back-link:hover {
+      background: rgba(168, 85, 247, 0.2);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(168, 85, 247, 0.3);
+    }
+
+    .section-title {
+      font-size: 2.75rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #a855f7, #ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-align: center;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: #a1a1aa;
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .project-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(168, 85, 247, 0.1);
+      border-radius: 20px;
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #a855f7, #ec4899);
+    }
+
+    .project-title {
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 0.75rem;
+    }
+
+    .role-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(236, 72, 153, 0.1);
+      color: #ec4899;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border: 1px solid rgba(236, 72, 153, 0.25);
+      margin-bottom: 1.25rem;
+    }
+
+    .project-description {
+      color: #d4d4d8;
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+    }
+
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .tech-tag {
+      background: rgba(168, 85, 247, 0.1);
+      color: #a855f7;
+      padding: 0.4rem 0.9rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      border: 1px solid rgba(168, 85, 247, 0.2);
+    }
+
+    .screenshot-gallery {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .screenshot-item {
+      border: 1px solid rgba(168, 85, 247, 0.2);
+      border-radius: 16px;
+      overflow: hidden;
+      background: #ffffff;
+    }
+
+    .screenshot-item img {
+      width: 100%;
+      display: block;
+    }
+
+    .screenshot-caption {
+      background: rgba(168, 85, 247, 0.08);
+      color: #d4d4d8;
+      font-size: 0.85rem;
+      padding: 0.75rem 1.25rem;
+      border-top: 1px solid rgba(168, 85, 247, 0.15);
+    }
+
+    .key-insights {
+      background: rgba(168, 85, 247, 0.05);
+      border-left: 3px solid #a855f7;
+      border-radius: 0 12px 12px 0;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .key-insights h4 {
+      color: #a855f7;
+      font-size: 1rem;
+      margin-bottom: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .key-insights ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .key-insights li {
+      color: #d4d4d8;
+      font-size: 0.95rem;
+      position: relative;
+      padding-left: 1.3rem;
+    }
+
+    .key-insights li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: #a855f7;
+      font-weight: bold;
+    }
+
+    .project-toggles {
+      margin-top: 1rem;
+    }
+
+    .toggle-section {
+      margin-bottom: 1rem;
+    }
+
+    .toggle-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.5rem;
+      background: rgba(168, 85, 247, 0.1);
+      border: 1px solid rgba(168, 85, 247, 0.2);
+      border-radius: 12px;
+      color: #ffffff;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .toggle-btn:hover {
+      background: rgba(168, 85, 247, 0.2);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(168, 85, 247, 0.2);
+    }
+
+    .toggle-icon {
+      font-size: 1.2rem;
+    }
+
+    .toggle-text {
+      flex: 1;
+      text-align: left;
+    }
+
+    .toggle-arrow {
+      font-size: 0.8rem;
+      transition: transform 0.3s ease;
+    }
+
+    .toggle-btn.active .toggle-arrow {
+      transform: rotate(180deg);
+    }
+
+    .toggle-content {
+      max-height: 0;
+      overflow: hidden;
+      padding: 0 1.5rem;
+      background: rgba(255, 255, 255, 0.02);
+      border-left: 1px solid rgba(168, 85, 247, 0.2);
+      border-right: 1px solid rgba(168, 85, 247, 0.2);
+      border-bottom: 1px solid rgba(168, 85, 247, 0.2);
+      border-radius: 0 0 12px 12px;
+      transition: all 0.4s ease;
+      margin-top: -1px;
+    }
+
+    .toggle-content.active {
+      max-height: 700px;
+      padding: 1.5rem;
+    }
+
+    .toggle-content p {
+      color: #d4d4d8;
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    .toggle-content p:last-child {
+      margin-bottom: 0;
+    }
+
+    .toggle-content strong {
+      color: #ffffff;
+    }
+
+    .toggle-content ul {
+      color: #d4d4d8;
+      padding-left: 1.3rem;
+      margin-bottom: 1rem;
+    }
+
+    .toggle-content li {
+      margin-bottom: 0.4rem;
+    }
+
+    .data-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #a855f7;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 0.5rem 1rem;
+      background: rgba(168, 85, 247, 0.1);
+      border-radius: 8px;
+      border: 1px solid rgba(168, 85, 247, 0.2);
+      transition: all 0.3s ease;
+      margin-top: 0.5rem;
+    }
+
+    .data-link:hover {
+      background: rgba(168, 85, 247, 0.2);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+      .section-title { font-size: 2rem; }
+      .container { padding: 1rem; }
+      .project-card { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <a href="index.html#projects" class="back-link">← Back to Portfolio</a>
+      <h1 class="section-title">Business Intelligence</h1>
+      <p class="subtitle">Transforming raw data into structured models and actionable insights through Excel, Power Pivot, and DAX</p>
+    </div>
+
+    <div class="project-card">
+      <h3 class="project-title">Indonesian Crime Data Analysis & Interactive Dashboard</h3>
+      <div class="role-badge">👥 Team Project, My Role: Data Cleaning & Measures/Chart Development</div>
+      <p class="project-description">
+        A relational data model built in Excel using a star schema (1 fact table and 4 dimension tables) to analyze
+        crime case data across Indonesia, covering case severity, arrest rates, response time, and case resolution
+        status. The model powers a set of PivotTables, PivotCharts, and an interactive dashboard for exploring
+        crime patterns by region, category, and time period.
+      </p>
+      <p class="project-disclaimer">
+        ⚠️ Disclaimer: The dataset used in this project was generated with the assistance of AI and is intended for educational and demonstration purposes only.
+    </p>
+
+      <div class="tech-stack">
+        <span class="tech-tag">Excel</span>
+        <span class="tech-tag">Power Pivot</span>
+        <span class="tech-tag">DAX</span>
+        <span class="tech-tag">Star Schema</span>
+        <span class="tech-tag">PivotTable & PivotChart</span>
+      </div>
+
+      <div class="screenshot-gallery">
+        <div class="screenshot-item">
+          <img src="shot_pivot_charts.jpg" alt="Pivot Table and Chart analysis sheet">
+          <div class="screenshot-caption">KPI scorecard and PivotChart breakdowns, arrest rate by crime type, case distribution by province, average response time, case status by year, and monthly case trend.</div>
+        </div>
+        <div class="screenshot-item">
+          <img src="shot_dashboard_table.jpg" alt="Interactive dashboard table with conditional formatting">
+          <div class="screenshot-caption">Interactive dashboard table showing arrest rate per crime type with conditional formatting status indicators.</div>
+        </div>
+      </div>
+
+      <div class="key-insights">
+        <h4>Key Insights</h4>
+        <ul>
+          <li>670 total cases recorded across 89 regions in Indonesia, with 544 arrests made (an 81% arrest rate).</li>
+          <li>Only 159 cases (23.7%) were marked as fully solved, while the rest remained reported, under investigation, or closed without resolution.</li>
+          <li>416 cases (62% of all cases) were classified as high severity, and the average police response time was 25.9 days.</li>
+          <li>Fraud, Cybercrime, and Corruption were the top 3 crime categories by case count (67, 66, and 57 cases).</li>
+          <li>DKI Jakarta recorded the highest number of cases (107), well above other provinces.</li>
+        </ul>
+      </div>
+
+      <div class="project-toggles">
+        <div class="toggle-section">
+          <button class="toggle-btn" onclick="toggleSection(this)">
+            <span class="toggle-icon">📄</span>
+            <span class="toggle-text">Problem & Business Recommendation</span>
+            <span class="toggle-arrow">▼</span>
+          </button>
+          <div class="toggle-content">
+            <p><strong>Problem:</strong> Police departments need a clear way to monitor case resolution performance across regions and crime types, so resources like officers and investigation time can be allocated where they are needed most.</p>
+            <p><strong>Recommendation:</strong> Prioritize additional investigative resources for Fraud, Cybercrime, and Corruption cases, since they make up the largest share of reported cases. Investigate why the overall solve rate is low (23.7%) despite a high arrest rate, as this gap suggests many arrests do not lead to case closure. Focus process improvements on high-case-volume regions like DKI Jakarta, and review response time procedures given the 25.9-day average, which may be too slow for high severity cases.</p>
+          </div>
+        </div>
+
+        <div class="toggle-section">
+          <button class="toggle-btn" onclick="toggleSection(this)">
+            <span class="toggle-icon">⚙️</span>
+            <span class="toggle-text">Data & Technical Approach</span>
+            <span class="toggle-arrow">▼</span>
+          </button>
+          <div class="toggle-content">
+            <p><strong>Data model:</strong> The workbook is structured as a star schema with one fact table and four dimension tables:</p>
+            <ul>
+              <li><strong>Fact_CrimeReport</strong>, The central table holding case counts, victim counts, arrest counts, response time, severity level, and case status for each report</li>
+              <li><strong>Dim_Location</strong>, Province, city, and district details for each region</li>
+              <li><strong>Dim_CrimeType</strong>, Crime category, description, severity level, and legal consequences</li>
+              <li><strong>Dim_Officer</strong>, Officer name, rank, department, and years of service</li>
+              <li><strong>Dim_Victim</strong>, Victim demographics, occupation, and injury severity</li>
+            </ul>
+            <p><strong>My contribution:</strong> Within the team, I was responsible for cleaning the raw data before it was loaded into the model, and for building the key DAX measures (case counts, arrest rate, solve rate, average response time) along with several of the PivotCharts used in the dashboard, including the arrest rate breakdown and the monthly case trend chart.</p>
+            <a href="Project Data Kepolisian Data Modelling.xlsx" class="data-link" download>📎 Download The Project </a>
+            <p><strong>Approach:</strong> The four dimension tables were connected to the fact table through relationships in Power Pivot, based on their respective ID fields. DAX measures were then built on top of this model to calculate rates and averages dynamically, which were used to power the PivotTables, PivotCharts, and the conditional-formatted interactive dashboard table.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleSection(button) {
+      const content = button.nextElementSibling;
+      const isActive = content.classList.contains('active');
+
+      const projectCard = button.closest('.project-card');
+      const allToggleContents = projectCard.querySelectorAll('.toggle-content');
+      const allToggleButtons = projectCard.querySelectorAll('.toggle-btn');
+
+      allToggleContents.forEach(tc => tc.classList.remove('active'));
+      allToggleButtons.forEach(tb => tb.classList.remove('active'));
+
+      if (!isActive) {
+        content.classList.add('active');
+        button.classList.add('active');
+      }
+    }
+  </script>
+</body>
+</html>
