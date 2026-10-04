@@ -134,10 +134,11 @@
       border: 1px solid rgba(168, 85, 247, 0.2);
     }
 
+    /* Compact screenshot gallery with lightbox */
     .screenshot-gallery {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
       margin-bottom: 2rem;
     }
 
@@ -146,19 +147,69 @@
       border-radius: 16px;
       overflow: hidden;
       background: #ffffff;
+      cursor: zoom-in;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .screenshot-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(168, 85, 247, 0.25);
     }
 
     .screenshot-item img {
       width: 100%;
+      height: 200px;
+      object-fit: cover;
+      object-position: top;
       display: block;
     }
 
     .screenshot-caption {
       background: rgba(168, 85, 247, 0.08);
       color: #d4d4d8;
-      font-size: 0.85rem;
-      padding: 0.75rem 1.25rem;
+      font-size: 0.82rem;
+      padding: 0.65rem 1rem;
       border-top: 1px solid rgba(168, 85, 247, 0.15);
+    }
+
+    .lightbox-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.88);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      cursor: zoom-out;
+    }
+
+    .lightbox-overlay.active {
+      display: flex;
+    }
+
+    .lightbox-overlay img {
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 8px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 2rem;
+      color: #fff;
+      font-size: 1.8rem;
+      line-height: 1;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.12);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .key-insights {
@@ -334,9 +385,6 @@
         status. The model powers a set of PivotTables, PivotCharts, and an interactive dashboard for exploring
         crime patterns by region, category, and time period.
       </p>
-      <p class="project-disclaimer">
-        ⚠️ Disclaimer: The dataset used in this project was generated with the assistance of AI and is intended for educational and demonstration purposes only.
-    </p>
 
       <div class="tech-stack">
         <span class="tech-tag">Excel</span>
@@ -347,13 +395,13 @@
       </div>
 
       <div class="screenshot-gallery">
-        <div class="screenshot-item">
-          <img src="shot_pivot_charts.jpg" alt="Pivot Table and Chart analysis sheet">
-          <div class="screenshot-caption">KPI scorecard and PivotChart breakdowns, arrest rate by crime type, case distribution by province, average response time, case status by year, and monthly case trend.</div>
+        <div class="screenshot-item" onclick="openLightbox('shot_crime_measures.jpg')">
+          <img src="shot_crime_measures.jpg" alt="DAX Measures list">
+          <div class="screenshot-caption">DAX measures built for this model (case counts, arrest rate, solve rate, average response time)</div>
         </div>
-        <div class="screenshot-item">
-          <img src="shot_dashboard_table.jpg" alt="Interactive dashboard table with conditional formatting">
-          <div class="screenshot-caption">Interactive dashboard table showing arrest rate per crime type with conditional formatting status indicators.</div>
+        <div class="screenshot-item" onclick="openLightbox('shot_crime_pivottable.jpg')">
+          <img src="shot_crime_pivottable.jpg" alt="PivotTable breakdown">
+          <div class="screenshot-caption">PivotTable breakdown: arrest rate and case distribution by crime type and province</div>
         </div>
       </div>
 
@@ -390,19 +438,101 @@
           <div class="toggle-content">
             <p><strong>Data model:</strong> The workbook is structured as a star schema with one fact table and four dimension tables:</p>
             <ul>
-              <li><strong>Fact_CrimeReport</strong>, The central table holding case counts, victim counts, arrest counts, response time, severity level, and case status for each report</li>
-              <li><strong>Dim_Location</strong>, Province, city, and district details for each region</li>
-              <li><strong>Dim_CrimeType</strong>, Crime category, description, severity level, and legal consequences</li>
-              <li><strong>Dim_Officer</strong>, Officer name, rank, department, and years of service</li>
-              <li><strong>Dim_Victim</strong>, Victim demographics, occupation, and injury severity</li>
+              <li><strong>Fact_CrimeReport</strong> — the central table holding case counts, victim counts, arrest counts, response time, severity level, and case status for each report</li>
+              <li><strong>Dim_Location</strong> — province, city, and district details for each region</li>
+              <li><strong>Dim_CrimeType</strong> — crime category, description, severity level, and legal consequences</li>
+              <li><strong>Dim_Officer</strong> — officer name, rank, department, and years of service</li>
+              <li><strong>Dim_Victim</strong> — victim demographics, occupation, and injury severity</li>
             </ul>
             <p><strong>My contribution:</strong> Within the team, I was responsible for cleaning the raw data before it was loaded into the model, and for building the key DAX measures (case counts, arrest rate, solve rate, average response time) along with several of the PivotCharts used in the dashboard, including the arrest rate breakdown and the monthly case trend chart.</p>
-            <a href="Project Data Kepolisian Data Modelling.xlsx" class="data-link" download>📎 Download The Project </a>
             <p><strong>Approach:</strong> The four dimension tables were connected to the fact table through relationships in Power Pivot, based on their respective ID fields. DAX measures were then built on top of this model to calculate rates and averages dynamically, which were used to power the PivotTables, PivotCharts, and the conditional-formatted interactive dashboard table.</p>
           </div>
         </div>
       </div>
     </div>
+
+    <div class="project-card">
+      <h3 class="project-title">Contoso Retail Performance Analysis (2016–2025)</h3>
+      <div class="role-badge">👤 Solo Project, My Role: Data Modeler & Dashboard Developer</div>
+      <p class="project-description">
+        A full relational data model built in Excel Power Pivot to analyze 10 years of retail sales data, covering
+        revenue, profit, and order patterns across product categories, regions, and time. The model powers a set
+        of DAX measures, PivotTables, PivotCharts, and an interactive dashboard with slicers and a timeline for
+        exploring performance by year, category, and channel.
+      </p>
+
+      <div class="tech-stack">
+        <span class="tech-tag">Excel</span>
+        <span class="tech-tag">Power Pivot</span>
+        <span class="tech-tag">DAX</span>
+        <span class="tech-tag">Star Schema</span>
+        <span class="tech-tag">Time Intelligence</span>
+      </div>
+
+      <div class="screenshot-gallery">
+        <div class="screenshot-item" onclick="openLightbox('shot_contoso_diagram.jpg')">
+          <img src="shot_contoso_diagram.jpg" alt="Power Pivot Diagram View">
+          <div class="screenshot-caption">Power Pivot Diagram View: Sales fact table related to Customer, Product, Store, and Date</div>
+        </div>
+        <div class="screenshot-item" onclick="openLightbox('shot_contoso_measures.jpg')">
+          <img src="shot_contoso_measures.jpg" alt="DAX Measures list">
+          <div class="screenshot-caption">DAX measures: Total Revenue, Total Profit, Profit Margin %, YoY Growth, and more</div>
+        </div>
+        <div class="screenshot-item" onclick="openLightbox('shot_contoso_dashboard.jpg')">
+          <img src="shot_contoso_dashboard.jpg" alt="Full dashboard view">
+          <div class="screenshot-caption">Full dashboard: KPI cards, slicers, and 4 chart panels</div>
+        </div>
+        <div class="screenshot-item" onclick="openLightbox('shot_contoso_closeup.jpg')">
+          <img src="shot_contoso_closeup.jpg" alt="Close-up chart detail">
+          <div class="screenshot-caption">Close-up: Revenue & Growth Analysis chart (2016–2025)</div>
+        </div>
+      </div>
+
+      <div class="key-insights">
+        <h4>Key Insights</h4>
+        <ul>
+          <li>Total revenue reached $218.8M across 93,470 orders between 2016 and 2025, with a total profit of $122.3M (a 55.9% profit margin) and an average order value of $2,341.</li>
+          <li>Computers was by far the strongest category, generating $94.3M in revenue (43% of the total) and $52.7M in profit — more than double the next-highest category.</li>
+          <li>North America accounted for $135.1M in revenue (62% of the total), well ahead of Europe ($70.3M) and Australia ($13.4M).</li>
+          <li>2023 was the peak year with $43.8M in revenue and 78.9% year-over-year growth, while 2024 and 2025 both declined (-27.8% and -7.5%).</li>
+          <li>Among the top 10 products, the Adventure Works Desktop PC2.33 XD233 (Silver) led with $1.93M in revenue.</li>
+        </ul>
+      </div>
+
+      <div class="project-toggles">
+        <div class="toggle-section">
+          <button class="toggle-btn" onclick="toggleSection(this)">
+            <span class="toggle-icon">📄</span>
+            <span class="toggle-text">Problem & Business Recommendation</span>
+            <span class="toggle-arrow">▼</span>
+          </button>
+          <div class="toggle-content">
+            <p><strong>Problem:</strong> Contoso's retail management wants to understand which product categories, regions, and time periods drive the most revenue and profit across its 10-year sales history, to guide inventory, marketing, and expansion decisions.</p>
+            <p><strong>Recommendation:</strong> Prioritize inventory and marketing investment in the Computers category, since it drives both the highest revenue and the highest profit by a wide margin. Continue focusing core resources on North America given its dominant revenue share, while exploring targeted growth initiatives in Australia, currently the smallest region. Investigate what drove the strong 2023 performance to see if those tactics can be repeated, and review what caused the 2024–2025 slowdown. Treat 2016 and 2026 as partial periods when reporting year-over-year figures, since neither reflects a full year of data.</p>
+          </div>
+        </div>
+
+        <div class="toggle-section">
+          <button class="toggle-btn" onclick="toggleSection(this)">
+            <span class="toggle-icon">⚙️</span>
+            <span class="toggle-text">Data & Technical Approach</span>
+            <span class="toggle-arrow">▼</span>
+          </button>
+          <div class="toggle-content">
+            <p><strong>Data source:</strong> This project uses the Contoso Retail Dataset, a synthetic dataset built by Microsoft specifically for Business Intelligence training, generated with SQLBI's Contoso Data Generator and distributed publicly via GitHub. It is not real company data. The dataset includes about 224,000 sales transactions, 105,000 customers, 2,500 products, and 74 stores, spanning January 2016 to December 2025.</p>
+            <p><strong>Data model:</strong> A star schema with one fact table (Sales) and four dimension tables (Customer, Product, Store, Date), connected through relationships in Power Pivot.</p>
+            <p><strong>Approach:</strong> Raw columns were cleaned and trimmed in Power Query before loading into the Data Model. Relationships were built between Sales and each dimension table, and the Date table was marked as the official date table to enable time-intelligence calculations. DAX measures were then built for revenue, cost, profit, margin, order counts, and year-over-year growth, which power the PivotTables, PivotCharts, KPI cards, and slicers in the final dashboard.</p>
+            <p>You can download the full project file below.</p>
+            <a href="YOUR_GOOGLE_DRIVE_LINK_HERE" class="data-link" target="_blank">📎 Download Project File (Excel)</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="lightbox-overlay" id="lightboxOverlay" onclick="closeLightbox()">
+    <span class="lightbox-close">&times;</span>
+    <img id="lightboxImg" src="" alt="Enlarged screenshot">
   </div>
 
   <script>
@@ -421,6 +551,15 @@
         content.classList.add('active');
         button.classList.add('active');
       }
+    }
+
+    function openLightbox(src) {
+      document.getElementById('lightboxImg').src = src;
+      document.getElementById('lightboxOverlay').classList.add('active');
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightboxOverlay').classList.remove('active');
     }
   </script>
 </body>
