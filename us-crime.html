@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        U.S. Crime & Public Safety Dashboard | Darren
+    </title>
+
+    <style>
+
+        :root {
+            --bg: #09090f;
+            --surface: #12111a;
+
+            --white: #f5f5f7;
+            --text: #d9d8df;
+            --muted: #92909d;
+
+            --purple: #9a5cff;
+            --purple-light: #be91ff;
+            --purple-dark: #7434d4;
+
+            --border: rgba(255,255,255,0.08);
+            --purple-border: rgba(154,92,255,0.30);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family:
+                Inter,
+                'Segoe UI',
+                Tahoma,
+                Geneva,
+                Verdana,
+                sans-serif;
+
+            color: var(--white);
+
+            background:
+                radial-gradient(
+                    circle at 10% 10%,
+                    rgba(116,52,212,0.10),
+                    transparent 26%
+                ),
+                radial-gradient(
+                    circle at 90% 35%,
+                    rgba(154,92,255,0.07),
+                    transparent 25%
+                ),
+                linear-gradient(
+                    135deg,
+                    #09090f,
+                    #0e0a14 55%,
+                    #09090f
+                );
+
+            min-height:
+                100vh;
+
+            line-height:
+                1.7;
+        }
+
+        body::before {
+            content: '';
+
+            position:
+                fixed;
+
+            inset:
+                0;
+
+            background-image:
+                linear-gradient(
+                    rgba(255,255,255,0.016) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,0.016) 1px,
+                    transparent 1px
+                );
+
+            background-size:
+                72px 72px;
+
+            pointer-events:
+                none;
+
+            z-index:
+                -1;
+        }
+
+        a {
+            color:
+                inherit;
+
+            text-decoration:
+                none;
+        }
+
+        .container {
+            width:
+                min(
+                    1150px,
+                    calc(100% - 48px)
+                );
+
+            margin:
+                0 auto;
+        }
+
+        .topbar {
+            padding:
+                28px 0 10px;
+        }
+
+        .back-link {
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            gap:
+                8px;
+
+            color:
+                var(--muted);
+
+            font-size:
+                0.78rem;
+
+            font-weight:
+                600;
+
+            transition:
+                all 0.25s ease;
+        }
+
+        .back-link:hover {
+            color:
+                var(--purple-light);
+
+            transform:
+                translateX(-3px);
+        }
+
+        .project-header {
+            padding:
+                65px 0 55px;
+        }
+
+        .project-index {
+            display:
+                inline-block;
+
+            margin-bottom:
+                14px;
+
+            color:
+                var(--purple-light);
+
+            font-size:
+                0.68rem;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                0.18em;
+
+            text-transform:
+                uppercase;
+        }
+
+        .project-header h1 {
+            max-width:
+                900px;
+
+            font-size:
+                clamp(
+                    2.7rem,
+                    6vw,
+                    5rem
+                );
+
+            line-height:
+                1.02;
+
+            letter-spacing:
+                -0.06em;
+
+            font-weight:
+                650;
+
+            margin-bottom:
+                18px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffffff,
+                    #dedce4 55%,
+                    #a66cff
+                );
+
+            -webkit-background-clip:
+                text;
+
+            -webkit-text-fill-color:
+                transparent;
+
+            background-clip:
+                text;
+        }
+
+        .subtitle {
+            max-width:
+                800px;
+
+            color:
+                var(--muted);
+
+            font-size:
+                0.98rem;
+
+            line-height:
+                1.85;
+        }
+
+        .project-card {
+            position:
+                relative;
+
+            padding:
+                34px;
+
+            margin-bottom:
+                28px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.042),
+                    rgba(154,92,255,0.018)
+                );
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                22px;
+
+            box-shadow:
+                0 25px 70px
+                rgba(0,0,0,0.22);
+
+            overflow:
+                hidden;
+        }
+
+        .project-card::before {
+            content:
+                '';
+
+            position:
+                absolute;
+
+            left:
+                0;
+
+            right:
+                0;
+
+            top:
+                0;
+
+            height:
+                2px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--purple-dark),
+                    var(--purple),
+                    var(--purple-light)
+                );
+        }
+
+        .project-title {
+            font-size:
+                1.75rem;
+
+            line-height:
+                1.25;
+
+            letter-spacing:
+                -0.035em;
+
+            margin-bottom:
+                13px;
+        }
+
+        .role-badge {
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            gap:
+                8px;
+
+            padding:
+                7px 12px;
+
+            margin-bottom:
+                17px;
+
+            color:
+                #dcbfff;
+
+            background:
+                rgba(154,92,255,0.08);
+
+            border:
+                1px solid
+                rgba(154,92,255,0.20);
+
+            border-radius:
+                999px;
+
+            font-size:
+                0.72rem;
+
+            font-weight:
+                700;
+        }
+
+        .project-description {
+            color:
+                var(--text);
+
+            font-size:
+                0.91rem;
+
+            line-height:
+                1.85;
+
+            margin-bottom:
+                19px;
+        }
+
+        .tech-stack {
+            display:
+                flex;
+
+            flex-wrap:
+                wrap;
+
+            gap:
+                7px;
+
+            margin-bottom:
+                28px;
+        }
+
+        .tech-tag {
+            padding:
+                6px 10px;
+
+            color:
+                #ceb2ff;
+
+            background:
+                rgba(154,92,255,0.07);
+
+            border:
+                1px solid
+                rgba(154,92,255,0.17);
+
+            border-radius:
+                999px;
+
+            font-size:
+                0.68rem;
+
+            font-weight:
+                600;
+        }
+
+        .dashboard-frame-wrap {
+            position:
+                relative;
+
+            padding-top:
+                68%;
+
+            height:
+                0;
+
+            overflow:
+                hidden;
+
+            border-radius:
+                16px;
+
+            margin-bottom:
+                30px;
+
+            border:
+                1px solid
+                rgba(154,92,255,0.20);
+
+            background:
+                #11111a;
+        }
+
+        .dashboard-frame-wrap iframe {
+            position:
+                absolute;
+
+            top:
+                0;
+
+            left:
+                0;
+
+            width:
+                100%;
+
+            height:
+                100%;
+
+            border:
+                none;
+        }
+
+        .key-insights {
+            margin-bottom:
+                30px;
+
+            padding:
+                21px 22px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(154,92,255,0.07),
+                    rgba(154,92,255,0.025)
+                );
+
+            border:
+                1px solid
+                rgba(154,92,255,0.14);
+
+            border-left:
+                3px solid
+                var(--purple);
+
+            border-radius:
+                0 14px 14px 0;
+        }
+
+        .key-insights h4 {
+            margin-bottom:
+                14px;
+
+            color:
+                var(--purple-light);
+
+            font-size:
+                0.78rem;
+
+            text-transform:
+                uppercase;
+
+            letter-spacing:
+                0.14em;
+        }
+
+        .key-insights ul {
+            list-style:
+                none;
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            gap:
+                9px;
+        }
+
+        .key-insights li {
+            position:
+                relative;
+
+            padding-left:
+                18px;
+
+            color:
+                var(--text);
+
+            font-size:
+                0.82rem;
+
+            line-height:
+                1.75;
+        }
+
+        .key-insights li::before {
+            content:
+                '▸';
+
+            position:
+                absolute;
+
+            left:
+                0;
+
+            color:
+                var(--purple-light);
+        }
+
+        .project-toggles {
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            gap:
+                10px;
+        }
+
+        .toggle-btn {
+            width:
+                100%;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                11px;
+
+            padding:
+                13px 15px;
+
+            color:
+                #e7e5eb;
+
+            background:
+                rgba(255,255,255,0.025);
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                11px;
+
+            font-family:
+                inherit;
+
+            font-size:
+                0.80rem;
+
+            font-weight:
+                650;
+
+            cursor:
+                pointer;
+
+            transition:
+                all 0.25s ease;
+        }
+
+        .toggle-btn:hover {
+            background:
+                rgba(154,92,255,0.055);
+
+            border-color:
+                var(--purple-border);
+        }
+
+        .toggle-btn.active {
+            border-radius:
+                11px 11px 0 0;
+
+            border-bottom-color:
+                transparent;
+
+            background:
+                rgba(154,92,255,0.065);
+        }
+
+        .toggle-icon {
+            font-size:
+                0.92rem;
+        }
+
+        .toggle-text {
+            flex:
+                1;
+
+            text-align:
+                left;
+        }
+
+        .toggle-arrow {
+            color:
+                var(--purple-light);
+
+            font-size:
+                0.65rem;
+
+            transition:
+                transform 0.25s ease;
+        }
+
+        .toggle-btn.active
+        .toggle-arrow {
+            transform:
+                rotate(180deg);
+        }
+
+        .toggle-content {
+            max-height:
+                0;
+
+            overflow:
+                hidden;
+
+            padding:
+                0 16px;
+
+            color:
+                var(--muted);
+
+            background:
+                rgba(255,255,255,0.018);
+
+            border-left:
+                1px solid
+                var(--border);
+
+            border-right:
+                1px solid
+                var(--border);
+
+            border-bottom:
+                1px solid
+                var(--border);
+
+            border-radius:
+                0 0 11px 11px;
+
+            transition:
+                max-height 0.4s ease,
+                padding 0.35s ease;
+        }
+
+        .toggle-content.active {
+            max-height:
+                800px;
+
+            padding:
+                17px;
+        }
+
+        .toggle-content p {
+            margin-bottom:
+                13px;
+
+            font-size:
+                0.81rem;
+
+            line-height:
+                1.8;
+        }
+
+        .toggle-content p:last-child {
+            margin-bottom:
+                0;
+        }
+
+        .toggle-content strong {
+            color:
+                #efedf3;
+        }
+
+        .toggle-content ul {
+            padding-left:
+                19px;
+
+            margin-bottom:
+                14px;
+        }
+
+        .toggle-content li {
+            margin-bottom:
+                6px;
+
+            font-size:
+                0.81rem;
+        }
+
+        .footer {
+            padding:
+                35px 0 45px;
+
+            color:
+                #5e5c68;
+
+            text-align:
+                center;
+
+            font-size:
+                0.68rem;
+
+            border-top:
+                1px solid
+                rgba(154,92,255,0.10);
+        }
+
+        @media (max-width: 760px) {
+
+            .container {
+                width:
+                    calc(100% - 30px);
+            }
+
+            .project-card {
+                padding:
+                    22px;
+            }
+
+            .project-header {
+                padding:
+                    45px 0 35px;
+            }
+
+            .project-header h1 {
+                font-size:
+                    2.55rem;
+            }
+
+            .dashboard-frame-wrap {
+                padding-top:
+                    105%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="topbar">
+
+            <a
+                href="index.html#projects"
+                class="back-link"
+            >
+                ← Back to Portfolio
+            </a>
+
+        </div>
+
+
+        <header class="project-header">
+
+            <div class="project-index">
+                Project 04
+            </div>
+
+            <h1>
+                U.S. Crime & Public Safety Dashboard
+            </h1>
+
+            <p class="subtitle">
+                An interactive Tableau dashboard analyzing
+                crime patterns across 10 major U.S. cities
+                between 2020 and 2025.
+            </p>
+
+        </header>
+
+
+        <div class="project-card">
+
+            <h2 class="project-title">
+                U.S. Crime & Public Safety Dashboard (2020–2025)
+            </h2>
+
+
+            <div class="role-badge">
+                👤 My Role: Solo Project,
+                Data Analyst & Dashboard Developer
+            </div>
+
+
+            <p class="project-description">
+                An interactive Tableau dashboard analyzing
+                1,000 recorded crime cases across 10 major
+                U.S. cities between 2020 and 2025, covering
+                crime type distribution, victim demographics,
+                city-level patterns, and time-of-day trends
+                to support public safety planning.
+            </p>
+
+
+            <div class="tech-stack">
+
+                <span class="tech-tag">
+                    Tableau
+                </span>
+
+                <span class="tech-tag">
+                    Data Visualization
+                </span>
+
+                <span class="tech-tag">
+                    Heat Map
+                </span>
+
+                <span class="tech-tag">
+                    Filters
+                </span>
+
+            </div>
+
+
+            <div class="dashboard-frame-wrap">
+
+                <iframe
+                    src="https://public.tableau.com/views/ProjectDavisDarren/Dashboard?:showVizHome=no&:embed=true"
+                    allowfullscreen
+                ></iframe>
+
+            </div>
+
+
+            <div class="key-insights">
+
+                <h4>
+                    Key Insights
+                </h4>
+
+                <ul>
+
+                    <li>
+                        Domestic Violence was the most common
+                        crime type recorded across all
+                        10 cities.
+                    </li>
+
+                    <li>
+                        The dataset covered 1,000 crime cases
+                        from 2020 to 2025, with an average
+                        victim age of 52.2 years.
+                    </li>
+
+                    <li>
+                        Night time accounted for the largest
+                        share of crime occurrences (34.5%),
+                        followed by Morning (28.1%),
+                        Afternoon (20.4%), and Evening (17.0%).
+                    </li>
+
+                    <li>
+                        Dallas recorded a notable spike in
+                        Burglary cases (19), while San Diego
+                        had the highest number of Domestic
+                        Violence cases (17) among the 10 cities.
+                    </li>
+
+                    <li>
+                        Overall criminality across the 10 cities
+                        rose from 2020, peaked around the middle
+                        of the period, then declined toward 2025.
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <div class="project-toggles">
+
+
+                <div class="toggle-section">
+
+                    <button
+                        class="toggle-btn"
+                        onclick="toggleSection(this)"
+                    >
+
+                        <span class="toggle-icon">
+                            📄
+                        </span>
+
+                        <span class="toggle-text">
+                            Problem & Business Recommendation
+                        </span>
+
+                        <span class="toggle-arrow">
+                            ▼
+                        </span>
+
+                    </button>
+
+
+                    <div class="toggle-content">
+
+                        <p>
+                            <strong>Problem:</strong>
+                            Public safety agencies need to understand
+                            which crime types, cities, and time
+                            periods carry the highest risk, so patrol
+                            resources and prevention programs can be
+                            allocated effectively across the
+                            10 monitored cities.
+                        </p>
+
+
+                        <p>
+                            <strong>Recommendation:</strong>
+                            Increase night-time and early-morning
+                            patrol presence, since these two periods
+                            together account for over 60% of recorded
+                            crimes. Prioritize domestic violence
+                            prevention and support programs, as it
+                            was the most common crime type overall.
+                            Investigate the specific drivers behind
+                            Dallas's spike in burglary cases and
+                            San Diego's spike in domestic violence
+                            cases to design targeted local
+                            interventions. Review what changed after
+                            the mid-period criminality peak to
+                            understand what, if anything, contributed
+                            to the later decline.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="toggle-section">
+
+                    <button
+                        class="toggle-btn"
+                        onclick="toggleSection(this)"
+                    >
+
+                        <span class="toggle-icon">
+                            ⚙️
+                        </span>
+
+                        <span class="toggle-text">
+                            Data & Technical Approach
+                        </span>
+
+                        <span class="toggle-arrow">
+                            ▼
+                        </span>
+
+                    </button>
+
+
+                    <div class="toggle-content">
+
+                        <p>
+                            <strong>Data source:</strong>
+                            This dataset was downloaded from Kaggle
+                            and contains 1,000 recorded crime cases
+                            across 10 major U.S. cities
+                            (Chicago, Dallas, Houston, Los Angeles,
+                            New York, Philadelphia, Phoenix,
+                            San Antonio, San Diego, and San Jose)
+                            between 2020 and 2025, including crime
+                            type, victim demographics, city, year,
+                            and time of day.
+                        </p>
+
+
+                        <p>
+                            <strong>Approach:</strong>
+                            The data was loaded into Tableau to build
+                            KPI cards for the most common crime type,
+                            average victim age, and total cases,
+                            along with a bar chart ranking crime
+                            types by total cases, a heat map showing
+                            crime type distribution per city, a line
+                            chart tracking the criminality trend over
+                            the years, and a pie chart breaking down
+                            the time of day when crimes occurred.
+                            Filters for victim race and year were
+                            added so viewers can explore the data
+                            interactively.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <footer class="footer">
+
+        <div class="container">
+            © 2026 Darren. All rights reserved.
+        </div>
+
+    </footer>
+
+
+    <script>
+
+        function toggleSection(button) {
+
+            const content =
+                button.nextElementSibling;
+
+            const isActive =
+                content.classList.contains('active');
+
+            const projectCard =
+                button.closest('.project-card');
+
+            const allToggleContents =
+                projectCard.querySelectorAll(
+                    '.toggle-content'
+                );
+
+            const allToggleButtons =
+                projectCard.querySelectorAll(
+                    '.toggle-btn'
+                );
+
+            allToggleContents.forEach(
+                tc => tc.classList.remove('active')
+            );
+
+            allToggleButtons.forEach(
+                tb => tb.classList.remove('active')
+            );
+
+            if (!isActive) {
+
+                content.classList.add('active');
+
+                button.classList.add('active');
+
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>
