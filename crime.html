@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Indonesian Crime Data Analysis | Darren</title>
+
+    <style>
+
+        :root {
+            --bg: #09090f;
+            --bg-soft: #0e0d15;
+            --surface: #12111a;
+            --surface-hover: #181622;
+
+            --white: #f5f5f7;
+            --text: #d9d8df;
+            --muted: #92909d;
+            --muted-dark: #666472;
+
+            --purple: #9a5cff;
+            --purple-light: #be91ff;
+            --purple-dark: #7434d4;
+
+            --border: rgba(255, 255, 255, 0.08);
+            --purple-border: rgba(154, 92, 255, 0.30);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family:
+                Inter,
+                'Segoe UI',
+                Tahoma,
+                Geneva,
+                Verdana,
+                sans-serif;
+
+            color: var(--white);
+
+            background:
+                radial-gradient(
+                    circle at 10% 10%,
+                    rgba(116, 52, 212, 0.10),
+                    transparent 26%
+                ),
+                radial-gradient(
+                    circle at 90% 35%,
+                    rgba(154, 92, 255, 0.07),
+                    transparent 25%
+                ),
+                linear-gradient(
+                    135deg,
+                    #09090f 0%,
+                    #0e0a14 55%,
+                    #09090f 100%
+                );
+
+            min-height: 100vh;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+
+            position: fixed;
+            inset: 0;
+
+            background-image:
+                linear-gradient(
+                    rgba(255,255,255,0.016) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,0.016) 1px,
+                    transparent 1px
+                );
+
+            background-size: 72px 72px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        ::selection {
+            background: rgba(154, 92, 255, 0.25);
+            color: #ffffff;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        .container {
+            width: min(1150px, calc(100% - 48px));
+            margin: 0 auto;
+        }
+
+        .topbar {
+            padding: 28px 0 10px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            color: var(--muted);
+
+            font-size: 0.78rem;
+            font-weight: 600;
+
+            transition: all 0.25s ease;
+        }
+
+        .back-link:hover {
+            color: var(--purple-light);
+            transform: translateX(-3px);
+        }
+
+        .project-header {
+            padding: 65px 0 55px;
+        }
+
+        .project-index {
+            display: inline-block;
+
+            margin-bottom: 14px;
+
+            color: var(--purple-light);
+
+            font-size: 0.68rem;
+            font-weight: 800;
+
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+
+        .project-header h1 {
+            max-width: 900px;
+
+            font-size:
+                clamp(
+                    2.7rem,
+                    6vw,
+                    5rem
+                );
+
+            line-height: 1.02;
+
+            letter-spacing: -0.06em;
+
+            font-weight: 650;
+
+            margin-bottom: 18px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffffff,
+                    #dedce4 55%,
+                    #a66cff
+                );
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            max-width: 760px;
+
+            color: var(--muted);
+
+            font-size: 0.98rem;
+            line-height: 1.85;
+        }
+
+        .project-card {
+            position: relative;
+
+            padding: 34px;
+
+            margin-bottom: 28px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.042),
+                    rgba(154,92,255,0.018)
+                );
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 22px;
+
+            box-shadow:
+                0 25px 70px rgba(0,0,0,0.22);
+
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+
+            position: absolute;
+
+            left: 0;
+            right: 0;
+            top: 0;
+
+            height: 2px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--purple-dark),
+                    var(--purple),
+                    var(--purple-light)
+                );
+        }
+
+        .project-title {
+            font-size: 1.75rem;
+
+            line-height: 1.25;
+
+            letter-spacing: -0.035em;
+
+            margin-bottom: 13px;
+        }
+
+        .role-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 7px 12px;
+
+            margin-bottom: 17px;
+
+            color: #dcbfff;
+
+            background:
+                rgba(154,92,255,0.08);
+
+            border:
+                1px solid
+                rgba(154,92,255,0.20);
+
+            border-radius: 999px;
+
+            font-size: 0.72rem;
+            font-weight: 700;
+        }
+
+        .project-description {
+            color: var(--text);
+
+            font-size: 0.91rem;
+            line-height: 1.85;
+
+            margin-bottom: 5px;
+        }
+
+        .project-disclaimer {
+            margin-top: 9px;
+            margin-bottom: 19px;
+
+            color: #f3ae32;
+
+            font-size: 0.72rem;
+
+            font-style: italic;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+
+            margin-bottom: 30px;
+        }
+
+        .tech-tag {
+            padding: 6px 10px;
+
+            color: #ceb2ff;
+
+            background:
+                rgba(154,92,255,0.07);
+
+            border:
+                1px solid
+                rgba(154,92,255,0.17);
+
+            border-radius: 999px;
+
+            font-size: 0.68rem;
+            font-weight: 600;
+        }
+
+        .gallery-title {
+            margin-bottom: 14px;
+
+            color: #d9d7df;
+
+            font-size: 0.72rem;
+            font-weight: 700;
+
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+        }
+
+        .screenshot-gallery {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 14px;
+
+            margin-bottom: 30px;
+        }
+
+        .screenshot-item {
+            overflow: hidden;
+
+            background: #ffffff;
+
+            border:
+                1px solid
+                rgba(154,92,255,0.18);
+
+            border-radius: 16px;
+
+            cursor: zoom-in;
+
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease,
+                border-color 0.3s ease;
+        }
+
+        .screenshot-item:hover {
+            transform: translateY(-5px);
+
+            border-color:
+                rgba(154,92,255,0.42);
+
+            box-shadow:
+                0 16px 35px
+                rgba(0,0,0,0.25);
+        }
+
+        .screenshot-item img {
+            width: 100%;
+            height: 270px;
+
+            object-fit: cover;
+            object-position: top;
+        }
+
+        .screenshot-caption {
+            padding: 11px 13px;
+
+            background: #17151d;
+
+            color: #a9a7b2;
+
+            font-size: 0.70rem;
+
+            border-top:
+                1px solid
+                rgba(154,92,255,0.12);
+        }
+
+        .key-insights {
+            margin-bottom: 30px;
+
+            padding: 21px 22px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(154,92,255,0.07),
+                    rgba(154,92,255,0.025)
+                );
+
+            border:
+                1px solid
+                rgba(154,92,255,0.14);
+
+            border-left:
+                3px solid
+                var(--purple);
+
+            border-radius:
+                0 14px 14px 0;
+        }
+
+        .key-insights h4 {
+            margin-bottom: 14px;
+
+            color:
+                var(--purple-light);
+
+            font-size:
+                0.78rem;
+
+            text-transform:
+                uppercase;
+
+            letter-spacing:
+                0.14em;
+        }
+
+        .key-insights ul {
+            list-style: none;
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            gap:
+                9px;
+        }
+
+        .key-insights li {
+            position: relative;
+
+            padding-left:
+                18px;
+
+            color:
+                var(--text);
+
+            font-size:
+                0.82rem;
+
+            line-height:
+                1.75;
+        }
+
+        .key-insights li::before {
+            content:
+                '▸';
+
+            position:
+                absolute;
+
+            left:
+                0;
+
+            color:
+                var(--purple-light);
+        }
+
+        .project-toggles {
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            gap:
+                10px;
+        }
+
+        .toggle-section {
+            margin-bottom:
+                0;
+        }
+
+        .toggle-btn {
+            width: 100%;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                11px;
+
+            padding:
+                13px 15px;
+
+            color:
+                #e7e5eb;
+
+            background:
+                rgba(255,255,255,0.025);
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                11px;
+
+            font-family:
+                inherit;
+
+            font-size:
+                0.80rem;
+
+            font-weight:
+                650;
+
+            cursor:
+                pointer;
+
+            transition:
+                all 0.25s ease;
+        }
+
+        .toggle-btn:hover {
+            background:
+                rgba(154,92,255,0.055);
+
+            border-color:
+                var(--purple-border);
+        }
+
+        .toggle-btn.active {
+            border-radius:
+                11px 11px 0 0;
+
+            border-bottom-color:
+                transparent;
+
+            background:
+                rgba(154,92,255,0.065);
+        }
+
+        .toggle-icon {
+            font-size:
+                0.92rem;
+        }
+
+        .toggle-text {
+            flex:
+                1;
+
+            text-align:
+                left;
+        }
+
+        .toggle-arrow {
+            color:
+                var(--purple-light);
+
+            font-size:
+                0.65rem;
+
+            transition:
+                transform 0.25s ease;
+        }
+
+        .toggle-btn.active .toggle-arrow {
+            transform:
+                rotate(180deg);
+        }
+
+        .toggle-content {
+            max-height: 0;
+
+            overflow: hidden;
+
+            padding:
+                0 16px;
+
+            color:
+                var(--muted);
+
+            background:
+                rgba(255,255,255,0.018);
+
+            border-left:
+                1px solid
+                var(--border);
+
+            border-right:
+                1px solid
+                var(--border);
+
+            border-bottom:
+                1px solid
+                var(--border);
+
+            border-radius:
+                0 0 11px 11px;
+
+            transition:
+                max-height 0.4s ease,
+                padding 0.35s ease;
+        }
+
+        .toggle-content.active {
+            max-height:
+                800px;
+
+            padding:
+                17px;
+        }
+
+        .toggle-content p {
+            margin-bottom:
+                13px;
+
+            font-size:
+                0.81rem;
+
+            line-height:
+                1.8;
+        }
+
+        .toggle-content p:last-child {
+            margin-bottom:
+                0;
+        }
+
+        .toggle-content strong {
+            color:
+                #efedf3;
+        }
+
+        .toggle-content ul {
+            padding-left:
+                19px;
+
+            margin-bottom:
+                14px;
+        }
+
+        .toggle-content li {
+            margin-bottom:
+                6px;
+
+            font-size:
+                0.81rem;
+        }
+
+        .data-link {
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            gap:
+                7px;
+
+            margin-top:
+                6px;
+
+            padding:
+                9px 12px;
+
+            color:
+                #d9bfff;
+
+            background:
+                rgba(154,92,255,0.07);
+
+            border:
+                1px solid
+                rgba(154,92,255,0.18);
+
+            border-radius:
+                8px;
+
+            font-size:
+                0.72rem;
+
+            font-weight:
+                700;
+
+            transition:
+                all 0.25s ease;
+        }
+
+        .data-link:hover {
+            background:
+                rgba(154,92,255,0.13);
+
+            border-color:
+                rgba(154,92,255,0.35);
+
+            transform:
+                translateY(-2px);
+        }
+
+        .lightbox-overlay {
+            display:
+                none;
+
+            position:
+                fixed;
+
+            inset:
+                0;
+
+            padding:
+                30px;
+
+            background:
+                rgba(4,4,8,0.91);
+
+            backdrop-filter:
+                blur(8px);
+
+            z-index:
+                2000;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            cursor:
+                zoom-out;
+        }
+
+        .lightbox-overlay.active {
+            display:
+                flex;
+        }
+
+        .lightbox-overlay img {
+            max-width:
+                94vw;
+
+            max-height:
+                88vh;
+
+            border-radius:
+                10px;
+
+            box-shadow:
+                0 25px 80px
+                rgba(0,0,0,0.55);
+
+            object-fit:
+                contain;
+        }
+
+        .lightbox-close {
+            position:
+                absolute;
+
+            top:
+                22px;
+
+            right:
+                25px;
+
+            width:
+                42px;
+
+            height:
+                42px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.10);
+
+            border-radius:
+                50%;
+
+            background:
+                rgba(255,255,255,0.08);
+
+            color:
+                #ffffff;
+
+            font-size:
+                1.6rem;
+
+            cursor:
+                pointer;
+        }
+
+        .footer {
+            padding:
+                35px 0 45px;
+
+            color:
+                #5e5c68;
+
+            text-align:
+                center;
+
+            font-size:
+                0.68rem;
+        }
+
+        @media (max-width: 760px) {
+
+            .container {
+                width:
+                    calc(100% - 30px);
+            }
+
+            .project-card {
+                padding:
+                    22px;
+            }
+
+            .project-header {
+                padding:
+                    45px 0 35px;
+            }
+
+            .project-header h1 {
+                font-size:
+                    2.65rem;
+            }
+
+            .screenshot-gallery {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .screenshot-item img {
+                height:
+                    235px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="topbar">
+
+            <a
+                href="index.html#projects"
+                class="back-link"
+            >
+                ← Back to Portfolio
+            </a>
+
+        </div>
+
+
+        <header class="project-header">
+
+            <div class="project-index">
+                Project 01
+            </div>
+
+            <h1>
+                Indonesian Crime Data Analysis
+                & Interactive Dashboard
+            </h1>
+
+            <p class="subtitle">
+                An Excel-based relational data model and
+                interactive dashboard for analyzing crime
+                patterns, arrest performance, response time,
+                and case resolution across Indonesia.
+            </p>
+
+        </header>
+
+
+        <div class="project-card">
+
+            <h2 class="project-title">
+                Indonesian Crime Data Analysis & Interactive Dashboard
+            </h2>
+
+
+            <div class="role-badge">
+                👥 Team Project, My Role:
+                Data Cleaning & Measures/Chart Development
+            </div>
+
+
+            <p class="project-description">
+                A relational data model built in Excel using
+                a star schema (1 fact table and 4 dimension
+                tables) to analyze crime case data across
+                Indonesia, covering case severity, arrest
+                rates, response time, and case resolution
+                status. The model powers a set of PivotTables,
+                PivotCharts, and an interactive dashboard for
+                exploring crime patterns by region, category,
+                and time period.
+            </p>
+
+
+            <p class="project-disclaimer">
+                ⚠️ Disclaimer: The dataset used in this project
+                was generated with the assistance of AI and is
+                intended for educational and demonstration
+                purposes only.
+            </p>
+
+
+            <div class="tech-stack">
+
+                <span class="tech-tag">
+                    Excel
+                </span>
+
+                <span class="tech-tag">
+                    Power Pivot
+                </span>
+
+                <span class="tech-tag">
+                    DAX
+                </span>
+
+                <span class="tech-tag">
+                    Star Schema
+                </span>
+
+                <span class="tech-tag">
+                    PivotTable & PivotChart
+                </span>
+
+            </div>
+
+
+            <div class="gallery-title">
+                Project Preview
+            </div>
+
+
+            <div class="screenshot-gallery">
+
+                <div
+                    class="screenshot-item"
+                    onclick="openLightbox('shot_crime_measures.jpg')"
+                >
+
+                    <img
+                        src="shot_crime_measures.jpg"
+                        alt="DAX Measures list"
+                    >
+
+                    <div class="screenshot-caption">
+                        DAX measures built for this model
+                        (case counts, arrest rate, solve rate,
+                        average response time)
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="screenshot-item"
+                    onclick="openLightbox('shot_crime_pivottable.jpg')"
+                >
+
+                    <img
+                        src="shot_crime_pivottable.jpg"
+                        alt="PivotTable breakdown"
+                    >
+
+                    <div class="screenshot-caption">
+                        PivotTable breakdown: arrest rate
+                        and case distribution by crime type
+                        and province
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="key-insights">
+
+                <h4>
+                    Key Insights
+                </h4>
+
+                <ul>
+
+                    <li>
+                        670 total cases recorded across
+                        89 regions in Indonesia, with
+                        544 arrests made (an 81% arrest rate).
+                    </li>
+
+                    <li>
+                        Only 159 cases (23.7%) were marked
+                        as fully solved, while the rest
+                        remained reported, under investigation,
+                        or closed without resolution.
+                    </li>
+
+                    <li>
+                        416 cases (62% of all cases) were
+                        classified as high severity, and
+                        the average police response time
+                        was 25.9 days.
+                    </li>
+
+                    <li>
+                        Fraud, Cybercrime, and Corruption
+                        were the top 3 crime categories
+                        by case count (67, 66, and 57 cases).
+                    </li>
+
+                    <li>
+                        DKI Jakarta recorded the highest
+                        number of cases (107), well above
+                        other provinces.
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <div class="project-toggles">
+
+
+                <div class="toggle-section">
+
+                    <button
+                        class="toggle-btn"
+                        onclick="toggleSection(this)"
+                    >
+
+                        <span class="toggle-icon">
+                            📄
+                        </span>
+
+                        <span class="toggle-text">
+                            Problem & Business Recommendation
+                        </span>
+
+                        <span class="toggle-arrow">
+                            ▼
+                        </span>
+
+                    </button>
+
+
+                    <div class="toggle-content">
+
+                        <p>
+                            <strong>Problem:</strong>
+                            Police departments need a clear
+                            way to monitor case resolution
+                            performance across regions and
+                            crime types, so resources like
+                            officers and investigation time
+                            can be allocated where they are
+                            needed most.
+                        </p>
+
+                        <p>
+                            <strong>Recommendation:</strong>
+                            Prioritize additional investigative
+                            resources for Fraud, Cybercrime,
+                            and Corruption cases, since they
+                            make up the largest share of reported
+                            cases. Investigate why the overall
+                            solve rate is low (23.7%) despite
+                            a high arrest rate, as this gap
+                            suggests many arrests do not lead
+                            to case closure. Focus process
+                            improvements on high-case-volume
+                            regions like DKI Jakarta, and review
+                            response time procedures given the
+                            25.9-day average, which may be too
+                            slow for high severity cases.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="toggle-section">
+
+                    <button
+                        class="toggle-btn"
+                        onclick="toggleSection(this)"
+                    >
+
+                        <span class="toggle-icon">
+                            ⚙️
+                        </span>
+
+                        <span class="toggle-text">
+                            Data & Technical Approach
+                        </span>
+
+                        <span class="toggle-arrow">
+                            ▼
+                        </span>
+
+                    </button>
+
+
+                    <div class="toggle-content">
+
+                        <p>
+                            <strong>Data model:</strong>
+                            The workbook is structured as a
+                            star schema with one fact table
+                            and four dimension tables:
+                        </p>
+
+
+                        <ul>
+
+                            <li>
+                                <strong>Fact_CrimeReport</strong>,
+                                The central table holding case
+                                counts, victim counts, arrest
+                                counts, response time, severity
+                                level, and case status for each
+                                report
+                            </li>
+
+                            <li>
+                                <strong>Dim_Location</strong>,
+                                Province, city, and district
+                                details for each region
+                            </li>
+
+                            <li>
+                                <strong>Dim_CrimeType</strong>,
+                                Crime category, description,
+                                severity level, and legal
+                                consequences
+                            </li>
+
+                            <li>
+                                <strong>Dim_Officer</strong>,
+                                Officer name, rank, department,
+                                and years of service
+                            </li>
+
+                            <li>
+                                <strong>Dim_Victim</strong>,
+                                Victim demographics, occupation,
+                                and injury severity
+                            </li>
+
+                        </ul>
+
+
+                        <p>
+                            <strong>My contribution:</strong>
+                            Within the team, I was responsible
+                            for cleaning the raw data before
+                            it was loaded into the model, and
+                            for building the key DAX measures
+                            (case counts, arrest rate, solve
+                            rate, average response time) along
+                            with several of the PivotCharts
+                            used in the dashboard, including
+                            the arrest rate breakdown and the
+                            monthly case trend chart.
+                        </p>
+
+
+                        <p>
+                            <strong>Approach:</strong>
+                            The four dimension tables were
+                            connected to the fact table through
+                            relationships in Power Pivot,
+                            based on their respective ID fields.
+                            DAX measures were then built on top
+                            of this model to calculate rates
+                            and averages dynamically, which
+                            were used to power the PivotTables,
+                            PivotCharts, and the conditional-
+                            formatted interactive dashboard table.
+                        </p>
+
+
+                        <a
+                            href="Police Project.xlsx"
+                            class="data-link"
+                            download
+                        >
+                            📎 Download The Project (CSV)
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="lightbox-overlay"
+        id="lightboxOverlay"
+        onclick="closeLightbox()"
+    >
+
+        <span
+            class="lightbox-close"
+        >
+            &times;
+        </span>
+
+        <img
+            id="lightboxImg"
+            src=""
+            alt="Enlarged screenshot"
+        >
+
+    </div>
+
+
+    <footer class="footer">
+
+        <div class="container">
+            © 2026 Darren. All rights reserved.
+        </div>
+
+    </footer>
+
+
+    <script>
+
+        function toggleSection(button) {
+
+            const content =
+                button.nextElementSibling;
+
+            const isActive =
+                content.classList.contains('active');
+
+            const projectCard =
+                button.closest('.project-card');
+
+            const allToggleContents =
+                projectCard.querySelectorAll(
+                    '.toggle-content'
+                );
+
+            const allToggleButtons =
+                projectCard.querySelectorAll(
+                    '.toggle-btn'
+                );
+
+            allToggleContents.forEach(tc => {
+                tc.classList.remove('active');
+            });
+
+            allToggleButtons.forEach(tb => {
+                tb.classList.remove('active');
+            });
+
+            if (!isActive) {
+                content.classList.add('active');
+                button.classList.add('active');
+            }
+
+        }
+
+
+        function openLightbox(src) {
+
+            document
+                .getElementById('lightboxImg')
+                .src = src;
+
+            document
+                .getElementById('lightboxOverlay')
+                .classList
+                .add('active');
+
+        }
+
+
+        function closeLightbox() {
+
+            document
+                .getElementById('lightboxOverlay')
+                .classList
+                .remove('active');
+
+        }
+
+    </script>
+
+</body>
+
+</html>
