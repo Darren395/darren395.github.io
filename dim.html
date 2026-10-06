@@ -11,7 +11,7 @@
     >
 
     <title>
-        Data & Information Management
+        Data & Information Management, Toko Cris
     </title>
 
     <style>
@@ -388,7 +388,7 @@
                 700;
         }
 
-        .academic-note {
+        .semester-note {
             margin-bottom:
                 30px;
 
@@ -414,7 +414,7 @@
                 0 14px 14px 0;
         }
 
-        .academic-note h4 {
+        .semester-note h4 {
             margin-bottom:
                 7px;
 
@@ -431,7 +431,7 @@
                 0.13em;
         }
 
-        .academic-note p {
+        .semester-note p {
             color:
                 var(--muted);
 
@@ -673,7 +673,6 @@
                 10px;
         }
 
-        .primary-button,
         .secondary-button {
             display:
                 inline-flex;
@@ -690,46 +689,6 @@
             border-radius:
                 999px;
 
-            font-size:
-                0.73rem;
-
-            font-weight:
-                700;
-
-            transition:
-                all 0.25s ease;
-        }
-
-        .primary-button {
-            color:
-                #ffffff;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    var(--purple-dark),
-                    var(--purple)
-                );
-
-            border:
-                1px solid
-                rgba(255,255,255,0.08);
-
-            box-shadow:
-                0 10px 25px
-                rgba(116,56,214,0.16);
-        }
-
-        .primary-button:hover {
-            transform:
-                translateY(-3px);
-
-            box-shadow:
-                0 15px 32px
-                rgba(116,56,214,0.25);
-        }
-
-        .secondary-button {
             color:
                 #d9d9e0;
 
@@ -739,6 +698,15 @@
             border:
                 1px solid
                 rgba(255,255,255,0.12);
+
+            font-size:
+                0.73rem;
+
+            font-weight:
+                700;
+
+            transition:
+                all 0.25s ease;
         }
 
         .secondary-button:hover {
@@ -753,6 +721,10 @@
 
             transform:
                 translateY(-3px);
+
+            box-shadow:
+                0 12px 30px
+                rgba(154,92,255,0.10);
         }
 
         .lightbox {
@@ -913,7 +885,6 @@
                     column;
             }
 
-            .primary-button,
             .secondary-button {
                 width:
                     100%;
@@ -952,10 +923,10 @@
             </h1>
 
             <p>
-                An academic project focused on data and information
-                management for an e-commerce business case,
-                combining database modeling, information structure,
-                and supporting interface design.
+                An academic Data and Information Management
+                project based on an e-commerce business case,
+                combining data modeling, database structure,
+                information management, and supporting interfaces.
             </p>
 
         </header>
@@ -988,22 +959,27 @@
                         Figma
                     </span>
 
+                    <span class="meta-tag">
+                        Semester 3
+                    </span>
+
                 </div>
 
 
-                <div class="academic-note">
+                <div class="semester-note">
 
                     <h4>
-                        Academic Project
+                        Academic Project · Semester 3
                     </h4>
 
                     <p>
-                        Toko Cris is an academic project based on
-                        an e-commerce business case. The project
-                        explores how business information can be
-                        structured into entities, attributes,
-                        relationships, keys, and supporting
-                        information management interfaces.
+                        Toko Cris was developed as part of my
+                        third-semester coursework in Data and
+                        Information Management. The project
+                        explores how data can be structured and
+                        managed to support an e-commerce business
+                        while connecting the underlying information
+                        structure with practical system interfaces.
                     </p>
 
                 </div>
@@ -1019,10 +995,10 @@
                     <p>
                         Toko Cris represents an e-commerce store
                         that sells electronic products. The project
-                        focuses on organizing the information needed
-                        to support customer orders, products,
-                        tracking, and promotional programs. The
-                        work covers normalization, entity and
+                        focuses on organizing business information
+                        related to customers, orders, products,
+                        tracking, and promotional programs. The work
+                        includes normalization, entity and
                         relationship definition, attribute and
                         domain design, key identification, and
                         interface concepts for sales and inventory
@@ -1042,16 +1018,17 @@
 
                     <div
                         class="gallery-item"
-                        onclick="openLightbox('model.2png')"
+                        onclick="openLightbox('erd.png')"
                     >
 
                         <img
-                            src="model2.png"
-                            alt="Toko Cris Data Model"
+                            src="erd.png"
+                            alt="Toko Cris Conceptual ERD"
                         >
 
                         <div class="gallery-caption">
-                            Data model and normalization structure
+                            Conceptual ERD: entities and
+                            high-level relationships
                         </div>
 
                     </div>
@@ -1064,12 +1041,12 @@
 
                         <img
                             src="keys.png"
-                            alt="Toko Cris Entity and Key Structure"
+                            alt="Toko Cris Logical ERD"
                         >
 
                         <div class="gallery-caption">
-                            Entity, attribute, relationship,
-                            and key definitions
+                            Logical ERD: attributes, relationships,
+                            and structured data definitions
                         </div>
 
                     </div>
@@ -1140,7 +1117,7 @@
                         </strong>
 
                         <span>
-                            Organizing data into structured forms
+                            Organizing structured data
                         </span>
 
                     </div>
@@ -1149,11 +1126,11 @@
                     <div class="focus-item">
 
                         <strong>
-                            Key Design
+                            ERD Design
                         </strong>
 
                         <span>
-                            Identifying candidate and primary keys
+                            Modeling conceptual and logical structure
                         </span>
 
                     </div>
@@ -1162,11 +1139,11 @@
                     <div class="focus-item">
 
                         <strong>
-                            Information Interface
+                            Information System
                         </strong>
 
                         <span>
-                            Supporting sales and stock management
+                            Supporting business operations
                         </span>
 
                     </div>
@@ -1183,14 +1160,15 @@
                 <div class="reflection">
 
                     <p>
-                        This project helped me understand how
-                        information management connects business
-                        requirements with structured data. Rather
-                        than looking only at the interface, I learned
-                        how the underlying entities, relationships,
-                        attributes, and keys need to be organized
-                        before information can be effectively used
-                        within a business system.
+                        This semester 3 project strengthened my
+                        understanding of how business information
+                        connects with database design and system
+                        requirements. It helped me move from
+                        identifying business entities and
+                        relationships to structuring them into
+                        a more detailed logical model and
+                        supporting the resulting information
+                        through practical interfaces.
                     </p>
 
                 </div>
@@ -1199,11 +1177,12 @@
                 <div class="project-actions">
 
                     <a
-                        href="dim.pdf"
-                        class="primary-button"
-                        download
+                        href="MASUKKAN-LINK-FIGMA-TOKO-CRIS-DISINI"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="secondary-button"
                     >
-                        Download Case Study ↓
+                        View Figma Project ↗
                     </a>
 
                 </div>
@@ -1230,7 +1209,7 @@
         <img
             id="lightbox-image"
             src=""
-            alt="Project Preview"
+            alt="Toko Cris Project Preview"
         >
 
     </div>
