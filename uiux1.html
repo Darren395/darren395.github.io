@@ -119,6 +119,14 @@
                 -1;
         }
 
+        ::selection {
+            background:
+                rgba(154,92,255,0.25);
+
+            color:
+                #ffffff;
+        }
+
         a {
             color:
                 inherit;
@@ -476,7 +484,7 @@
                 hidden;
 
             background:
-                #ffffff;
+                transparent;
 
             border:
                 1px solid
@@ -511,13 +519,16 @@
                 100%;
 
             height:
-                330px;
+                auto;
+
+            display:
+                block;
 
             object-fit:
-                contain;
+                initial;
 
             background:
-                #ffffff;
+                transparent;
         }
 
         .gallery-caption {
@@ -863,8 +874,11 @@
             }
 
             .gallery-item img {
+                width:
+                    100%;
+
                 height:
-                    360px;
+                    auto;
             }
 
             .project-focus {
@@ -1034,7 +1048,7 @@
                     >
 
                         <img
-                            src="profilepage.png"
+                            src="profile.png"
                             alt="Profile Interface"
                         >
 
@@ -1061,6 +1075,7 @@
 
                     </div>
 
+
                 </div>
 
 
@@ -1070,6 +1085,7 @@
 
 
                 <div class="project-focus">
+
 
                     <div class="focus-item">
 
@@ -1121,6 +1137,7 @@
                         </span>
 
                     </div>
+
 
                 </div>
 
