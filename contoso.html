@@ -4,9 +4,15 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Contoso Retail Performance Analysis | Darren</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Contoso Retail Performance Analysis
+    </title>
 
     <style>
 
@@ -25,8 +31,8 @@
             --purple-light: #be91ff;
             --purple-dark: #7434d4;
 
-            --border: rgba(255, 255, 255, 0.08);
-            --purple-border: rgba(154, 92, 255, 0.30);
+            --border: rgba(255,255,255,0.08);
+            --purple-border: rgba(154,92,255,0.30);
         }
 
         * {
@@ -53,14 +59,16 @@
             background:
                 radial-gradient(
                     circle at 10% 10%,
-                    rgba(116, 52, 212, 0.10),
+                    rgba(116,52,212,0.10),
                     transparent 26%
                 ),
+
                 radial-gradient(
                     circle at 90% 35%,
-                    rgba(154, 92, 255, 0.07),
+                    rgba(154,92,255,0.07),
                     transparent 25%
                 ),
+
                 linear-gradient(
                     135deg,
                     #09090f 0%,
@@ -84,6 +92,7 @@
                     rgba(255,255,255,0.016) 1px,
                     transparent 1px
                 ),
+
                 linear-gradient(
                     90deg,
                     rgba(255,255,255,0.016) 1px,
@@ -91,112 +100,73 @@
                 );
 
             background-size: 72px 72px;
+
             pointer-events: none;
             z-index: -1;
         }
 
         ::selection {
-            background:
-                rgba(154, 92, 255, 0.25);
-
-            color:
-                #ffffff;
+            background: rgba(154,92,255,0.25);
+            color: #ffffff;
         }
 
         a {
-            color:
-                inherit;
-
-            text-decoration:
-                none;
+            color: inherit;
+            text-decoration: none;
         }
 
         img {
-            display:
-                block;
-
-            max-width:
-                100%;
+            display: block;
+            max-width: 100%;
         }
 
         .container {
-            width:
-                min(
-                    1150px,
-                    calc(100% - 48px)
-                );
-
-            margin:
-                0 auto;
+            width: min(1150px, calc(100% - 48px));
+            margin: 0 auto;
         }
 
         .topbar {
-            padding:
-                28px 0 10px;
+            padding: 28px 0 10px;
         }
 
         .back-link {
-            display:
-                inline-flex;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
 
-            align-items:
-                center;
+            color: var(--muted);
 
-            gap:
-                8px;
+            font-size: 0.78rem;
+            font-weight: 600;
 
-            color:
-                var(--muted);
-
-            font-size:
-                0.78rem;
-
-            font-weight:
-                600;
-
-            transition:
-                all 0.25s ease;
+            transition: all 0.25s ease;
         }
 
         .back-link:hover {
-            color:
-                var(--purple-light);
-
-            transform:
-                translateX(-3px);
+            color: var(--purple-light);
+            transform: translateX(-3px);
         }
 
         .project-header {
-            padding:
-                65px 0 55px;
+            padding: 65px 0 55px;
         }
 
         .project-index {
-            display:
-                inline-block;
+            display: inline-block;
 
-            margin-bottom:
-                14px;
+            margin-bottom: 14px;
 
-            color:
-                var(--purple-light);
+            color: var(--purple-light);
 
-            font-size:
-                0.68rem;
+            font-size: 0.68rem;
+            font-weight: 800;
 
-            font-weight:
-                800;
-
-            letter-spacing:
-                0.18em;
-
-            text-transform:
-                uppercase;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
         }
 
         .project-header h1 {
-            max-width:
-                900px;
+            max-width: 900px;
 
             font-size:
                 clamp(
@@ -205,17 +175,11 @@
                     5rem
                 );
 
-            line-height:
-                1.02;
+            line-height: 1.02;
+            letter-spacing: -0.06em;
+            font-weight: 650;
 
-            letter-spacing:
-                -0.06em;
-
-            font-weight:
-                650;
-
-            margin-bottom:
-                18px;
+            margin-bottom: 18px;
 
             background:
                 linear-gradient(
@@ -225,39 +189,26 @@
                     #a66cff
                 );
 
-            -webkit-background-clip:
-                text;
-
-            -webkit-text-fill-color:
-                transparent;
-
-            background-clip:
-                text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .subtitle {
-            max-width:
-                800px;
+            max-width: 800px;
 
-            color:
-                var(--muted);
+            color: var(--muted);
 
-            font-size:
-                0.98rem;
-
-            line-height:
-                1.85;
+            font-size: 0.98rem;
+            line-height: 1.85;
         }
 
         .project-card {
-            position:
-                relative;
+            position: relative;
 
-            padding:
-                34px;
+            padding: 34px;
 
-            margin-bottom:
-                28px;
+            margin-bottom: 28px;
 
             background:
                 linear-gradient(
@@ -270,35 +221,25 @@
                 1px solid
                 var(--border);
 
-            border-radius:
-                22px;
+            border-radius: 22px;
 
             box-shadow:
                 0 25px 70px
                 rgba(0,0,0,0.22);
 
-            overflow:
-                hidden;
+            overflow: hidden;
         }
 
         .project-card::before {
-            content:
-                '';
+            content: '';
 
-            position:
-                absolute;
+            position: absolute;
 
-            left:
-                0;
+            left: 0;
+            right: 0;
+            top: 0;
 
-            right:
-                0;
-
-            top:
-                0;
-
-            height:
-                2px;
+            height: 2px;
 
             background:
                 linear-gradient(
@@ -310,37 +251,25 @@
         }
 
         .project-title {
-            font-size:
-                1.75rem;
+            font-size: 1.75rem;
 
-            line-height:
-                1.25;
+            line-height: 1.25;
 
-            letter-spacing:
-                -0.035em;
+            letter-spacing: -0.035em;
 
-            margin-bottom:
-                13px;
+            margin-bottom: 13px;
         }
 
         .role-badge {
-            display:
-                inline-flex;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
 
-            align-items:
-                center;
+            padding: 7px 12px;
 
-            gap:
-                8px;
+            margin-bottom: 17px;
 
-            padding:
-                7px 12px;
-
-            margin-bottom:
-                17px;
-
-            color:
-                #dcbfff;
+            color: #dcbfff;
 
             background:
                 rgba(154,92,255,0.08);
@@ -349,50 +278,35 @@
                 1px solid
                 rgba(154,92,255,0.20);
 
-            border-radius:
-                999px;
+            border-radius: 999px;
 
-            font-size:
-                0.72rem;
-
-            font-weight:
-                700;
+            font-size: 0.72rem;
+            font-weight: 700;
         }
 
         .project-description {
-            color:
-                var(--text);
+            color: var(--text);
 
-            font-size:
-                0.91rem;
+            font-size: 0.91rem;
+            line-height: 1.85;
 
-            line-height:
-                1.85;
-
-            margin-bottom:
-                19px;
+            margin-bottom: 19px;
         }
 
         .tech-stack {
-            display:
-                flex;
+            display: flex;
 
-            flex-wrap:
-                wrap;
+            flex-wrap: wrap;
 
-            gap:
-                7px;
+            gap: 7px;
 
-            margin-bottom:
-                30px;
+            margin-bottom: 30px;
         }
 
         .tech-tag {
-            padding:
-                6px 10px;
+            padding: 6px 10px;
 
-            color:
-                #ceb2ff;
+            color: #ceb2ff;
 
             background:
                 rgba(154,92,255,0.07);
@@ -401,69 +315,48 @@
                 1px solid
                 rgba(154,92,255,0.17);
 
-            border-radius:
-                999px;
+            border-radius: 999px;
 
-            font-size:
-                0.68rem;
-
-            font-weight:
-                600;
+            font-size: 0.68rem;
+            font-weight: 600;
         }
 
         .gallery-title {
-            margin-bottom:
-                14px;
+            margin-bottom: 14px;
 
-            color:
-                #d9d7df;
+            color: #d9d7df;
 
-            font-size:
-                0.72rem;
+            font-size: 0.72rem;
+            font-weight: 700;
 
-            font-weight:
-                700;
+            text-transform: uppercase;
 
-            text-transform:
-                uppercase;
-
-            letter-spacing:
-                0.14em;
+            letter-spacing: 0.14em;
         }
 
         .screenshot-gallery {
-            display:
-                grid;
+            display: grid;
 
             grid-template-columns:
-                repeat(
-                    2,
-                    1fr
-                );
+                repeat(2, 1fr);
 
-            gap:
-                14px;
+            gap: 14px;
 
-            margin-bottom:
-                30px;
+            margin-bottom: 30px;
         }
 
         .screenshot-item {
-            overflow:
-                hidden;
+            overflow: hidden;
 
-            background:
-                #ffffff;
+            background: #ffffff;
 
             border:
                 1px solid
                 rgba(154,92,255,0.18);
 
-            border-radius:
-                16px;
+            border-radius: 16px;
 
-            cursor:
-                zoom-in;
+            cursor: zoom-in;
 
             transition:
                 transform 0.3s ease,
@@ -472,8 +365,7 @@
         }
 
         .screenshot-item:hover {
-            transform:
-                translateY(-5px);
+            transform: translateY(-5px);
 
             border-color:
                 rgba(154,92,255,0.42);
@@ -484,22 +376,15 @@
         }
 
         .screenshot-item img {
-            width:
-                100%;
+            width: 100%;
+            height: 270px;
 
-            height:
-                270px;
-
-            object-fit:
-                cover;
-
-            object-position:
-                top;
+            object-fit: cover;
+            object-position: top;
         }
 
         .screenshot-caption {
-            padding:
-                11px 13px;
+            padding: 11px 13px;
 
             background:
                 #17151d;
@@ -612,11 +497,6 @@
 
             gap:
                 10px;
-        }
-
-        .toggle-section {
-            margin-bottom:
-                0;
         }
 
         .toggle-btn {
@@ -1093,18 +973,18 @@
 
                 <div
                     class="screenshot-item"
-                    onclick="openLightbox('shot_contoso_diagram.jpg')"
+                    onclick="openLightbox('model.png')"
                 >
 
                     <img
-                        src="shot_contoso_diagram.jpg"
+                        src="model.png"
                         alt="Power Pivot Diagram View"
                     >
 
                     <div class="screenshot-caption">
-                        Power Pivot Diagram View: Sales fact
-                        table related to Customer, Product,
-                        Store, and Date
+                        Power Pivot Diagram View:
+                        Sales fact table related to
+                        Customer, Product, Store, and Date
                     </div>
 
                 </div>
@@ -1112,11 +992,11 @@
 
                 <div
                     class="screenshot-item"
-                    onclick="openLightbox('shot_contoso_measures.jpg')"
+                    onclick="openLightbox('dax.png')"
                 >
 
                     <img
-                        src="shot_contoso_measures.jpg"
+                        src="dax.png"
                         alt="DAX Measures list"
                     >
 
@@ -1131,11 +1011,11 @@
 
                 <div
                     class="screenshot-item"
-                    onclick="openLightbox('shot_contoso_dashboard.jpg')"
+                    onclick="openLightbox('dashboard.png')"
                 >
 
                     <img
-                        src="shot_contoso_dashboard.jpg"
+                        src="dashboard.png"
                         alt="Full dashboard view"
                     >
 
@@ -1149,20 +1029,21 @@
 
                 <div
                     class="screenshot-item"
-                    onclick="openLightbox('shot_contoso_closeup.jpg')"
+                    onclick="openLightbox('growth.png')"
                 >
 
                     <img
-                        src="shot_contoso_closeup.jpg"
-                        alt="Close-up chart detail"
+                        src="growth.png"
+                        alt="Revenue and Growth Analysis"
                     >
 
                     <div class="screenshot-caption">
-                        Close-up: Revenue & Growth
-                        Analysis chart (2016–2025)
+                        Revenue & Growth Analysis
+                        chart (2016–2025)
                     </div>
 
                 </div>
+
 
             </div>
 
@@ -1254,6 +1135,7 @@
                             marketing, and expansion decisions.
                         </p>
 
+
                         <p>
                             <strong>Recommendation:</strong>
                             Prioritize inventory and marketing
@@ -1261,19 +1143,18 @@
                             since it drives both the highest
                             revenue and the highest profit by
                             a wide margin. Continue focusing
-                            core resources on North America
-                            given its dominant revenue share,
-                            while exploring targeted growth
-                            initiatives in Australia, currently
-                            the smallest region. Investigate
-                            what drove the strong 2023 performance
-                            to see if those tactics can be
-                            repeated, and review what caused
-                            the 2024–2025 slowdown. Treat 2016
-                            and 2026 as partial periods when
-                            reporting year-over-year figures,
-                            since neither reflects a full year
-                            of data.
+                            core resources on North America given
+                            its dominant revenue share, while
+                            exploring targeted growth initiatives
+                            in Australia, currently the smallest
+                            region. Investigate what drove the
+                            strong 2023 performance to see if
+                            those tactics can be repeated, and
+                            review what caused the 2024–2025
+                            slowdown. Treat 2016 and 2026 as
+                            partial periods when reporting
+                            year-over-year figures, since
+                            neither reflects a full year of data.
                         </p>
 
                     </div>
@@ -1343,9 +1224,10 @@
                             time-intelligence calculations. DAX
                             measures were then built for revenue,
                             cost, profit, margin, order counts,
-                            and year-over-year growth, which power
-                            the PivotTables, PivotCharts, KPI cards,
-                            and slicers in the final dashboard.
+                            and year-over-year growth, which
+                            power the PivotTables, PivotCharts,
+                            KPI cards, and slicers in the final
+                            dashboard.
                         </p>
 
 
@@ -1360,12 +1242,13 @@
                             class="data-link"
                             download
                         >
-                            📎 Download The Project (CSV)
+                            📎 Download The Project
                         </a>
 
                     </div>
 
                 </div>
+
 
             </div>
 
@@ -1380,7 +1263,9 @@
         onclick="closeLightbox()"
     >
 
-        <span class="lightbox-close">
+        <span
+            class="lightbox-close"
+        >
             &times;
         </span>
 
