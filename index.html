@@ -1785,6 +1785,53 @@
                     2.45rem;
             }
 
+            .hero-buttons {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                flex-wrap: wrap;
+                margin-top: 0.9rem;
+            }
+
+            .hero-buttons .cta-button {
+                margin-top: 0;
+            }
+
+            .cv-button {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            
+                padding: 12px 24px;
+            
+                border-radius: 999px;
+            
+                background: rgba(255, 255, 255, 0.025);
+            
+                border: 1px solid rgba(255, 255, 255, 0.12);
+            
+                color: #d9d9e0;
+            
+                font-size: 0.82rem;
+                font-weight: 700;
+            
+                transition: all 0.3s ease;
+            }
+
+            .cv-button:hover {
+                color: #ffffff;
+            
+                border-color: rgba(154, 92, 255, 0.45);
+            
+                background: rgba(154, 92, 255, 0.08);
+            
+                transform: translateY(-3px);
+            
+                box-shadow:
+                    0 12px 30px
+                    rgba(154, 92, 255, 0.12);
+            }
+
             .skills-grid {
                 grid-template-columns:
                     repeat(
@@ -1960,12 +2007,24 @@
                         data modeling, and database analytics.
                     </p>
 
-                    <a
-                        href="#projects"
-                        class="cta-button"
-                    >
-                        See My Work
-                    </a>
+                    <div class="hero-buttons">
+
+                        <a
+                            href="#projects"
+                            class="cta-button"
+                        >
+                            See My Work
+                        </a>
+                    
+                        <a
+                            href="CV-Darren.pdf"
+                            class="cv-button"
+                            download
+                        >
+                            Download CV ↓
+                        </a>
+                    
+                    </div>
 
                 </div>
 
