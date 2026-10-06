@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Data & Information Management
+    </title>
+
+    <style>
+
+        :root {
+            --bg: #09090f;
+            --surface: #12111a;
+
+            --white: #f5f5f7;
+            --text: #d9d8df;
+            --muted: #92909d;
+
+            --purple: #9a5cff;
+            --purple-light: #be91ff;
+            --purple-dark: #7434d4;
+
+            --border:
+                rgba(255,255,255,0.08);
+
+            --purple-border:
+                rgba(154,92,255,0.30);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family:
+                Inter,
+                'Segoe UI',
+                Tahoma,
+                Geneva,
+                Verdana,
+                sans-serif;
+
+            color:
+                var(--white);
+
+            background:
+                radial-gradient(
+                    circle at 10% 10%,
+                    rgba(116,52,212,0.10),
+                    transparent 26%
+                ),
+
+                radial-gradient(
+                    circle at 90% 35%,
+                    rgba(154,92,255,0.07),
+                    transparent 25%
+                ),
+
+                linear-gradient(
+                    135deg,
+                    #09090f,
+                    #0e0a14 55%,
+                    #09090f
+                );
+
+            min-height:
+                100vh;
+
+            line-height:
+                1.7;
+
+            overflow-x:
+                hidden;
+        }
+
+        body::before {
+            content:
+                '';
+
+            position:
+                fixed;
+
+            inset:
+                0;
+
+            background-image:
+                linear-gradient(
+                    rgba(255,255,255,0.016) 1px,
+                    transparent 1px
+                ),
+
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,0.016) 1px,
+                    transparent 1px
+                );
+
+            background-size:
+                72px 72px;
+
+            pointer-events:
+                none;
+
+            z-index:
+                -1;
+        }
+
+        ::selection {
+            background:
+                rgba(154,92,255,0.25);
+
+            color:
+                #ffffff;
+        }
+
+        a {
+            color:
+                inherit;
+
+            text-decoration:
+                none;
+        }
+
+        img {
+            display:
+                block;
+
+            max-width:
+                100%;
+        }
+
+        .container {
+            width:
+                min(
+                    1120px,
+                    calc(100% - 48px)
+                );
+
+            margin:
+                0 auto;
+        }
+
+        .topbar {
+            padding:
+                28px 0 10px;
+        }
+
+        .back-link {
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            gap:
+                8px;
+
+            color:
+                var(--muted);
+
+            font-size:
+                0.78rem;
+
+            font-weight:
+                600;
+
+            transition:
+                all 0.25s ease;
+        }
+
+        .back-link:hover {
+            color:
+                var(--purple-light);
+
+            transform:
+                translateX(-3px);
+        }
+
+        .project-header {
+            padding:
+                65px 0 45px;
+        }
+
+        .project-label {
+            display:
+                inline-block;
+
+            margin-bottom:
+                14px;
+
+            color:
+                var(--purple-light);
+
+            font-size:
+                0.68rem;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                0.18em;
+
+            text-transform:
+                uppercase;
+        }
+
+        .project-header h1 {
+            max-width:
+                900px;
+
+            font-size:
+                clamp(
+                    3rem,
+                    6vw,
+                    5rem
+                );
+
+            line-height:
+                1;
+
+            letter-spacing:
+                -0.06em;
+
+            font-weight:
+                650;
+
+            margin-bottom:
+                18px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffffff,
+                    #dedce4 55%,
+                    #a66cff
+                );
+
+            -webkit-background-clip:
+                text;
+
+            -webkit-text-fill-color:
+                transparent;
+
+            background-clip:
+                text;
+        }
+
+        .project-header p {
+            max-width:
+                800px;
+
+            color:
+                var(--muted);
+
+            font-size:
+                0.96rem;
+
+            line-height:
+                1.85;
+        }
+
+        .project-card {
+            position:
+                relative;
+
+            padding:
+                34px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.042),
+                    rgba(154,92,255,0.018)
+                );
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                22px;
+
+            box-shadow:
+                0 25px 70px
+                rgba(0,0,0,0.22);
+
+            overflow:
+                hidden;
+        }
+
+        .project-card::before {
+            content:
+                '';
+
+            position:
+                absolute;
+
+            left:
+                0;
+
+            right:
+                0;
+
+            top:
+                0;
+
+            height:
+                2px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--purple-dark),
+                    var(--purple),
+                    var(--purple-light)
+                );
+        }
+
+        .project-title {
+            font-size:
+                1.75rem;
+
+            line-height:
+                1.25;
+
+            letter-spacing:
+                -0.035em;
+
+            margin-bottom:
+                14px;
+        }
+
+        .project-meta {
+            display:
+                flex;
+
+            flex-wrap:
+                wrap;
+
+            gap:
+                8px;
+
+            margin-bottom:
+                24px;
+        }
+
+        .meta-tag {
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            padding:
+                7px 11px;
+
+            color:
+                #dcbfff;
+
+            background:
+                rgba(154,92,255,0.08);
+
+            border:
+                1px solid
+                rgba(154,92,255,0.20);
+
+            border-radius:
+                999px;
+
+            font-size:
+                0.68rem;
+
+            font-weight:
+                700;
+        }
+
+        .academic-note {
+            margin-bottom:
+                30px;
+
+            padding:
+                19px 20px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(154,92,255,0.08),
+                    rgba(154,92,255,0.025)
+                );
+
+            border:
+                1px solid
+                rgba(154,92,255,0.16);
+
+            border-left:
+                3px solid
+                var(--purple);
+
+            border-radius:
+                0 14px 14px 0;
+        }
+
+        .academic-note h4 {
+            margin-bottom:
+                7px;
+
+            color:
+                var(--purple-light);
+
+            font-size:
+                0.74rem;
+
+            text-transform:
+                uppercase;
+
+            letter-spacing:
+                0.13em;
+        }
+
+        .academic-note p {
+            color:
+                var(--muted);
+
+            font-size:
+                0.81rem;
+
+            line-height:
+                1.8;
+        }
+
+        .section-heading {
+            margin-bottom:
+                15px;
+
+            color:
+                #d8d6df;
+
+            font-size:
+                0.72rem;
+
+            font-weight:
+                700;
+
+            letter-spacing:
+                0.14em;
+
+            text-transform:
+                uppercase;
+        }
+
+        .overview {
+            margin-bottom:
+                30px;
+        }
+
+        .overview p {
+            max-width:
+                920px;
+
+            color:
+                var(--text);
+
+            font-size:
+                0.84rem;
+
+            line-height:
+                1.85;
+        }
+
+        .gallery {
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(
+                    2,
+                    1fr
+                );
+
+            gap:
+                14px;
+
+            margin-bottom:
+                30px;
+        }
+
+        .gallery-item {
+            overflow:
+                hidden;
+
+            background:
+                transparent;
+
+            border:
+                1px solid
+                rgba(154,92,255,0.18);
+
+            border-radius:
+                16px;
+
+            cursor:
+                zoom-in;
+
+            transition:
+                transform 0.3s ease,
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform:
+                translateY(-4px);
+
+            border-color:
+                rgba(154,92,255,0.42);
+
+            box-shadow:
+                0 16px 35px
+                rgba(0,0,0,0.25);
+        }
+
+        .gallery-item img {
+            width:
+                100%;
+
+            height:
+                auto;
+
+            display:
+                block;
+
+            background:
+                transparent;
+        }
+
+        .gallery-caption {
+            padding:
+                11px 13px;
+
+            background:
+                #17151d;
+
+            color:
+                #a9a7b2;
+
+            font-size:
+                0.70rem;
+
+            border-top:
+                1px solid
+                rgba(154,92,255,0.12);
+        }
+
+        .focus-grid {
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(
+                    4,
+                    1fr
+                );
+
+            gap:
+                10px;
+
+            margin-bottom:
+                30px;
+        }
+
+        .focus-item {
+            padding:
+                17px 12px;
+
+            text-align:
+                center;
+
+            background:
+                rgba(255,255,255,0.02);
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                13px;
+
+            transition:
+                all 0.25s ease;
+        }
+
+        .focus-item:hover {
+            transform:
+                translateY(-3px);
+
+            border-color:
+                var(--purple-border);
+        }
+
+        .focus-item strong {
+            display:
+                block;
+
+            margin-bottom:
+                5px;
+
+            color:
+                var(--white);
+
+            font-size:
+                0.78rem;
+        }
+
+        .focus-item span {
+            color:
+                var(--muted);
+
+            font-size:
+                0.65rem;
+        }
+
+        .reflection {
+            margin-bottom:
+                30px;
+
+            padding:
+                20px;
+
+            background:
+                rgba(255,255,255,0.018);
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                14px;
+        }
+
+        .reflection p {
+            color:
+                var(--text);
+
+            font-size:
+                0.82rem;
+
+            line-height:
+                1.85;
+        }
+
+        .project-actions {
+            display:
+                flex;
+
+            flex-wrap:
+                wrap;
+
+            gap:
+                10px;
+        }
+
+        .primary-button,
+        .secondary-button {
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            padding:
+                11px 17px;
+
+            border-radius:
+                999px;
+
+            font-size:
+                0.73rem;
+
+            font-weight:
+                700;
+
+            transition:
+                all 0.25s ease;
+        }
+
+        .primary-button {
+            color:
+                #ffffff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--purple-dark),
+                    var(--purple)
+                );
+
+            border:
+                1px solid
+                rgba(255,255,255,0.08);
+
+            box-shadow:
+                0 10px 25px
+                rgba(116,56,214,0.16);
+        }
+
+        .primary-button:hover {
+            transform:
+                translateY(-3px);
+
+            box-shadow:
+                0 15px 32px
+                rgba(116,56,214,0.25);
+        }
+
+        .secondary-button {
+            color:
+                #d9d9e0;
+
+            background:
+                rgba(255,255,255,0.025);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.12);
+        }
+
+        .secondary-button:hover {
+            color:
+                #ffffff;
+
+            border-color:
+                rgba(154,92,255,0.42);
+
+            background:
+                rgba(154,92,255,0.07);
+
+            transform:
+                translateY(-3px);
+        }
+
+        .lightbox {
+            display:
+                none;
+
+            position:
+                fixed;
+
+            inset:
+                0;
+
+            padding:
+                25px;
+
+            background:
+                rgba(4,4,8,0.92);
+
+            backdrop-filter:
+                blur(8px);
+
+            z-index:
+                9999;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            cursor:
+                zoom-out;
+        }
+
+        .lightbox.active {
+            display:
+                flex;
+        }
+
+        .lightbox img {
+            max-width:
+                94vw;
+
+            max-height:
+                90vh;
+
+            object-fit:
+                contain;
+
+            border-radius:
+                10px;
+
+            box-shadow:
+                0 25px 80px
+                rgba(0,0,0,0.55);
+        }
+
+        .lightbox-close {
+            position:
+                absolute;
+
+            top:
+                20px;
+
+            right:
+                25px;
+
+            width:
+                42px;
+
+            height:
+                42px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            color:
+                #ffffff;
+
+            background:
+                rgba(255,255,255,0.08);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.10);
+
+            border-radius:
+                50%;
+
+            font-size:
+                1.5rem;
+
+            cursor:
+                pointer;
+        }
+
+        .footer {
+            padding:
+                35px 0 45px;
+
+            color:
+                #5e5c68;
+
+            text-align:
+                center;
+
+            font-size:
+                0.68rem;
+
+            border-top:
+                1px solid
+                rgba(154,92,255,0.10);
+        }
+
+        @media (max-width: 760px) {
+
+            .container {
+                width:
+                    calc(100% - 30px);
+            }
+
+            .project-header {
+                padding:
+                    45px 0 35px;
+            }
+
+            .project-card {
+                padding:
+                    22px;
+            }
+
+            .project-header h1 {
+                font-size:
+                    2.7rem;
+            }
+
+            .gallery {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .focus-grid {
+                grid-template-columns:
+                    repeat(
+                        2,
+                        1fr
+                    );
+            }
+
+            .project-actions {
+                flex-direction:
+                    column;
+            }
+
+            .primary-button,
+            .secondary-button {
+                width:
+                    100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="topbar">
+
+            <a
+                href="index.html#projects"
+                class="back-link"
+            >
+                ← Back to Portfolio
+            </a>
+
+        </div>
+
+
+        <header class="project-header">
+
+            <div class="project-label">
+                Project · Data & Information Management
+            </div>
+
+            <h1>
+                Toko Cris
+            </h1>
+
+            <p>
+                An academic project focused on data and information
+                management for an e-commerce business case,
+                combining database modeling, information structure,
+                and supporting interface design.
+            </p>
+
+        </header>
+
+
+        <main>
+
+            <div class="project-card">
+
+                <h2 class="project-title">
+                    Toko Cris — Data & Information Management
+                </h2>
+
+
+                <div class="project-meta">
+
+                    <span class="meta-tag">
+                        Data Modeling
+                    </span>
+
+                    <span class="meta-tag">
+                        Database Design
+                    </span>
+
+                    <span class="meta-tag">
+                        Information Management
+                    </span>
+
+                    <span class="meta-tag">
+                        Figma
+                    </span>
+
+                </div>
+
+
+                <div class="academic-note">
+
+                    <h4>
+                        Academic Project
+                    </h4>
+
+                    <p>
+                        Toko Cris is an academic project based on
+                        an e-commerce business case. The project
+                        explores how business information can be
+                        structured into entities, attributes,
+                        relationships, keys, and supporting
+                        information management interfaces.
+                    </p>
+
+                </div>
+
+
+                <div class="section-heading">
+                    Project Overview
+                </div>
+
+
+                <div class="overview">
+
+                    <p>
+                        Toko Cris represents an e-commerce store
+                        that sells electronic products. The project
+                        focuses on organizing the information needed
+                        to support customer orders, products,
+                        tracking, and promotional programs. The
+                        work covers normalization, entity and
+                        relationship definition, attribute and
+                        domain design, key identification, and
+                        interface concepts for sales and inventory
+                        management.
+                    </p>
+
+                </div>
+
+
+                <div class="section-heading">
+                    Project Preview
+                </div>
+
+
+                <div class="gallery">
+
+
+                    <div
+                        class="gallery-item"
+                        onclick="openLightbox('model.png')"
+                    >
+
+                        <img
+                            src="model.png"
+                            alt="Toko Cris Data Model"
+                        >
+
+                        <div class="gallery-caption">
+                            Data model and normalization structure
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="gallery-item"
+                        onclick="openLightbox('keys.png')"
+                    >
+
+                        <img
+                            src="keys.png"
+                            alt="Toko Cris Entity and Key Structure"
+                        >
+
+                        <div class="gallery-caption">
+                            Entity, attribute, relationship,
+                            and key definitions
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="gallery-item"
+                        onclick="openLightbox('sales.png')"
+                    >
+
+                        <img
+                            src="sales.png"
+                            alt="Toko Cris Sales Report Interface"
+                        >
+
+                        <div class="gallery-caption">
+                            Sales reporting interface
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="gallery-item"
+                        onclick="openLightbox('stock.png')"
+                    >
+
+                        <img
+                            src="stock.png"
+                            alt="Toko Cris Inventory Interface"
+                        >
+
+                        <div class="gallery-caption">
+                            Product stock and inventory interface
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="section-heading">
+                    Project Focus
+                </div>
+
+
+                <div class="focus-grid">
+
+
+                    <div class="focus-item">
+
+                        <strong>
+                            Data Modeling
+                        </strong>
+
+                        <span>
+                            Structuring entities and relationships
+                        </span>
+
+                    </div>
+
+
+                    <div class="focus-item">
+
+                        <strong>
+                            Normalization
+                        </strong>
+
+                        <span>
+                            Organizing data into structured forms
+                        </span>
+
+                    </div>
+
+
+                    <div class="focus-item">
+
+                        <strong>
+                            Key Design
+                        </strong>
+
+                        <span>
+                            Identifying candidate and primary keys
+                        </span>
+
+                    </div>
+
+
+                    <div class="focus-item">
+
+                        <strong>
+                            Information Interface
+                        </strong>
+
+                        <span>
+                            Supporting sales and stock management
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="section-heading">
+                    Reflection
+                </div>
+
+
+                <div class="reflection">
+
+                    <p>
+                        This project helped me understand how
+                        information management connects business
+                        requirements with structured data. Rather
+                        than looking only at the interface, I learned
+                        how the underlying entities, relationships,
+                        attributes, and keys need to be organized
+                        before information can be effectively used
+                        within a business system.
+                    </p>
+
+                </div>
+
+
+                <div class="project-actions">
+
+                    <a
+                        href="dim.pdf"
+                        class="primary-button"
+                        download
+                    >
+                        Download Case Study ↓
+                    </a>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+
+    <div
+        class="lightbox"
+        id="lightbox"
+    >
+
+        <span
+            class="lightbox-close"
+            onclick="closeLightbox()"
+        >
+            ×
+        </span>
+
+        <img
+            id="lightbox-image"
+            src=""
+            alt="Project Preview"
+        >
+
+    </div>
+
+
+    <footer class="footer">
+
+        <div class="container">
+            © 2026 Darren. All rights reserved.
+        </div>
+
+    </footer>
+
+
+    <script>
+
+        const galleryItems =
+            document.querySelectorAll(
+                '.gallery-item'
+            );
+
+
+        const lightbox =
+            document.getElementById(
+                'lightbox'
+            );
+
+
+        const lightboxImage =
+            document.getElementById(
+                'lightbox-image'
+            );
+
+
+        galleryItems.forEach(
+            item => {
+
+                item.addEventListener(
+                    'click',
+                    function() {
+
+                        const image =
+                            this.querySelector('img');
+
+                        lightboxImage.src =
+                            image.src;
+
+                        lightbox.classList.add(
+                            'active'
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+        function openLightbox(src) {
+
+            lightboxImage.src =
+                src;
+
+            lightbox.classList.add(
+                'active'
+            );
+
+        }
+
+
+        function closeLightbox() {
+
+            lightbox.classList.remove(
+                'active'
+            );
+
+            lightboxImage.src =
+                '';
+
+        }
+
+
+        lightbox.addEventListener(
+            'click',
+            function(e) {
+
+                if (
+                    e.target === lightbox
+                ) {
+
+                    closeLightbox();
+
+                }
+
+            }
+        );
+
+
+        document.addEventListener(
+            'keydown',
+            function(e) {
+
+                if (
+                    e.key === 'Escape'
+                ) {
+
+                    closeLightbox();
+
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>
