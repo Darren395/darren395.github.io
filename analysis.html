@@ -474,6 +474,126 @@
                 900px;
         }
 
+
+
+        .mobile-ui-intro {
+            max-width: 760px;
+            margin: -3px 0 24px;
+            color: var(--muted);
+            font-size: 0.83rem;
+            line-height: 1.85;
+        }
+
+        .mobile-ui-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+            align-items: start;
+            margin-bottom: 34px;
+        }
+
+        .mobile-ui-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 0;
+            padding: 18px 12px 17px;
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 18px;
+            background: linear-gradient(145deg, rgba(255,255,255,0.025), rgba(154,92,255,0.025));
+            transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+        }
+
+        .mobile-ui-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--purple-border);
+            background: linear-gradient(145deg, rgba(255,255,255,0.035), rgba(154,92,255,0.055));
+        }
+
+        .mobile-ui-card h3 {
+            width: 100%;
+            margin-bottom: 14px;
+            color: var(--white);
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 650;
+            letter-spacing: -0.015em;
+        }
+
+        .mobile-ui-card p {
+            max-width: 235px;
+            margin-top: 15px;
+            color: var(--muted);
+            text-align: center;
+            font-size: 0.70rem;
+            line-height: 1.7;
+        }
+
+        .phone-frame {
+            position: relative;
+            width: 100%;
+            max-width: 228px;
+            padding: 7px;
+            border: 1px solid rgba(255,255,255,0.18);
+            border-radius: 36px;
+            background: linear-gradient(145deg, #3a3a46 0%, #101015 25%, #24242d 70%, #09090d 100%);
+            box-shadow: 0 20px 38px rgba(0,0,0,0.36), inset 0 0 0 1px rgba(0,0,0,0.55);
+            isolation: isolate;
+        }
+
+        .phone-frame::before {
+            content: '';
+            position: absolute;
+            z-index: 3;
+            top: 13px;
+            left: 50%;
+            width: 56px;
+            height: 13px;
+            transform: translateX(-50%);
+            border-radius: 999px;
+            background: #17171e;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.8);
+            pointer-events: none;
+        }
+
+        .phone-screen {
+            overflow: hidden;
+            width: 100%;
+            border-radius: 28px;
+            background: #ffffff;
+            line-height: 0;
+        }
+
+        .phone-screen img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain;
+            background: #ffffff;
+        }
+
+        .mobile-ui-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 15px;
+            color: var(--purple-light);
+            font-size: 0.65rem;
+            font-weight: 750;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .mobile-ui-label::before {
+            content: '';
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--purple-light);
+            box-shadow: 0 0 10px rgba(190,145,255,0.35);
+        }
+
+
         .project-focus {
             display:
                 grid;
@@ -741,6 +861,20 @@
                     );
             }
 
+            .mobile-ui-gallery {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 14px;
+            }
+
+            .mobile-ui-card {
+                padding: 15px 9px;
+            }
+
+            .phone-frame {
+                max-width: 218px;
+            }
+
+
             .project-actions {
                 flex-direction:
                     column;
@@ -753,6 +887,22 @@
             }
 
         }
+
+
+        @media (max-width: 480px) {
+            .mobile-ui-gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .mobile-ui-card {
+                padding: 20px 14px;
+            }
+
+            .phone-frame {
+                max-width: 245px;
+            }
+        }
+
 
     </style>
 
@@ -861,6 +1011,54 @@
                         The project documentation contains the
                         detailed analysis and system design work.
                     </p>
+
+                </div>
+
+
+
+
+                <div class="section-heading">
+                    Hampiness Mobile UI/UX Preview
+                </div>
+
+                <p class="mobile-ui-intro">
+                    Three key mobile screens from Hampiness, presented in individual phone mockups to show how the interface flows from vendor details to category browsing and hamper selection.
+                </p>
+
+                <div class="mobile-ui-gallery">
+
+                    <article class="mobile-ui-card">
+                        <h3>Vendor Details</h3>
+                        <div class="phone-frame">
+                            <div class="phone-screen">
+                                <img src="vendor.png" alt="Hampiness mobile screen showing vendor details">
+                            </div>
+                        </div>
+                        <span class="mobile-ui-label">01 · Vendor profile</span>
+                        <p>Introduces the hamper vendor, its store information, and the path to browse available categories.</p>
+                    </article>
+
+                    <article class="mobile-ui-card">
+                        <h3>Hampers Categories</h3>
+                        <div class="phone-frame">
+                            <div class="phone-screen">
+                                <img src="category.png" alt="Hampiness mobile screen showing hamper categories">
+                            </div>
+                        </div>
+                        <span class="mobile-ui-label">02 · Browse categories</span>
+                        <p>Shows the available hamper categories with imagery and short descriptions to help users explore options.</p>
+                    </article>
+
+                    <article class="mobile-ui-card">
+                        <h3>Holiday Hampers</h3>
+                        <div class="phone-frame">
+                            <div class="phone-screen">
+                                <img src="hampers.png" alt="Hampiness mobile screen showing holiday hamper packages and prices">
+                            </div>
+                        </div>
+                        <span class="mobile-ui-label">03 · Select a package</span>
+                        <p>Displays seasonal hamper packages, prices, and selection buttons for choosing a suitable gift.</p>
+                    </article>
 
                 </div>
 
